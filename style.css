@@ -131,6 +131,12 @@ h1.hero-h em{font-style:normal;color:var(--rose)}
   aspect-ratio:4/5;background:var(--navy);
 }
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.hero-photo{position:relative}
+.hero-video{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;position:absolute;inset:0;z-index:2;background:var(--navy)}
+/* La photo de repli est dessous : visible tant que la vidéo ne charge pas */
+.hero-video-fallback{position:absolute;inset:0;z-index:1}
+/* Si la vidéo n'a pas de source valide, le navigateur n'affiche rien : le poster/fallback prend le relais */
+.hero-video:not([src]){}
 .hero-quote-badge{
   position:absolute;bottom:-22px;left:-22px;background:var(--navy);color:#fff;
   padding:20px 26px;border-radius:6px;max-width:250px;box-shadow:var(--shadow-lg);
