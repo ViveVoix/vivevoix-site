@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.associationvivevoix.fr/sitemap.xml

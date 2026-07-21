@@ -1,0 +1,18 @@
+{
+  "name": "vivevoix",
+  "main": "worker.js",
+  "compatibility_date": "2026-04-22",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "destination_address": "contact@associationvivevoix.fr"
+    }
+  ]
+}
