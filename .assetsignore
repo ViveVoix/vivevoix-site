@@ -1,9 +1,9 @@
+node_modules/**
 worker.js
-   wrangler.jsonc
-   package.json
-   package-lock.json
-   .gitignore
-   .assetsignore
-   node_modules
-   GUIDE-DEPLOIEMENT.md
-   LISEZ-MOI-DABORD.md
+wrangler.jsonc
+package.json
+package-lock.json
+.gitignore
+.assetsignore
+GUIDE-DEPLOIEMENT.md
+LISEZ-MOI-DABORD.md
