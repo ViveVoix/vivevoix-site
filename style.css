@@ -275,6 +275,7 @@ h1.hero-h em{font-style:normal;color:var(--rose)}
   display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;
   max-width:760px;margin:24px auto 0;
 }
+.slot[hidden]{display:none !important}
 .slot{
   display:block;background:#fff;border:2px solid var(--line);border-radius:10px;
   padding:20px 22px;cursor:pointer;position:relative;

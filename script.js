@@ -88,6 +88,7 @@
         slots.forEach(function(s){
           var match = s.getAttribute('data-for') === age;
           s.hidden = !match;
+          s.style.display = match ? '' : 'none';
           s.classList.remove('checked');
           var r = s.querySelector('input');
           if(r) r.checked = false;
