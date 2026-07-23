@@ -11,11 +11,17 @@
     });
   }
 
-  // Formulaire de contact — envoi réel vers le Worker
+  // Formulaires (contact & inscription) — envoi via Formspree
   var form = document.querySelector('form.vv');
   if(form){
     var msg = form.querySelector('.formmsg');
     var btn = form.querySelector('button[type="submit"]');
+
+    // Choix de l'endpoint selon la page
+    var isInscription = !!document.querySelector('.age-picker');
+    var ENDPOINT = isInscription
+      ? 'https://formspree.io/f/xlgqwvnl'   // Vive Voix — Inscription
+      : 'https://formspree.io/f/xjgnezrg';  // Vive Voix — Contact
 
     function showMsg(text, isError){
       if(!msg) return;
@@ -26,35 +32,77 @@
       msg.scrollIntoView({behavior:'smooth', block:'center'});
     }
 
+    function val(name){
+      var el = form.elements[name];
+      return el && el.value ? el.value.trim() : '';
+    }
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
 
-      var data = {
-        nom: (form.nom && form.nom.value || '').trim(),
-        email: (form.email && form.email.value || '').trim(),
-        public: (form.public && form.public.value || ''),
-        message: (form.message && form.message.value || '').trim(),
-        website: (form.website && form.website.value || '')
-      };
-
-      if(!data.nom || !data.email || data.email.indexOf('@') === -1){
-        showMsg("Merci de renseigner votre nom et un e-mail valide.", true);
+      // Pot de miel anti-spam : si rempli, on simule un succès sans envoyer
+      if(val('website')){
+        showMsg("Merci ! Votre message a bien été envoyé.", false);
+        form.reset();
         return;
       }
+
+      var data = {};
+      var okToSend = true;
+
+      if(isInscription){
+        var creneauEl = form.querySelector('input[name="creneau"]:checked')
+                     || document.querySelector('input[name="creneau"]:checked');
+        data = {
+          _subject     : 'Nouvelle demande d\u2019inscription — Vive Voix',
+          Creneau      : creneauEl ? creneauEl.value : '(non sélectionné)',
+          Participant  : val('participant'),
+          Age          : val('age'),
+          Responsable  : val('responsable'),
+          email        : val('email'),
+          Telephone    : val('tel'),
+          Message      : val('message')
+        };
+        if(!data.Participant || !data.email || data.email.indexOf('@') === -1){
+          showMsg("Merci d'indiquer le nom du participant et un e-mail valide.", true);
+          okToSend = false;
+        } else if(!creneauEl){
+          showMsg("Merci de choisir un créneau ci-dessus avant d'envoyer.", true);
+          okToSend = false;
+        }
+      } else {
+        data = {
+          _subject : 'Nouveau message depuis le site — Vive Voix',
+          Nom      : val('nom'),
+          email    : val('email'),
+          Concerne : val('public'),
+          Message  : val('message')
+        };
+        if(!data.Nom || !data.email || data.email.indexOf('@') === -1){
+          showMsg("Merci de renseigner votre nom et un e-mail valide.", true);
+          okToSend = false;
+        }
+      }
+
+      if(!okToSend) return;
 
       var original = btn ? btn.textContent : '';
       if(btn){ btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
 
-      fetch('/api/contact', {
+      fetch(ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(data)
       })
-      .then(function(r){ return r.json().catch(function(){ return {ok:false}; }); })
-      .then(function(res){
-        if(res && res.ok){
-          showMsg("Merci ! Votre message a bien été envoyé. Nous vous répondrons rapidement.", false);
+      .then(function(r){
+        if(r.ok){
+          showMsg(isInscription
+            ? "Merci ! Votre demande d'inscription a bien été envoyée. Nous vous répondons sous 24 à 48h."
+            : "Merci ! Votre message a bien été envoyé. Nous vous répondrons rapidement.", false);
           form.reset();
+          var recap = document.getElementById('recap');
+          if(recap) recap.hidden = true;
+          document.querySelectorAll('.slot').forEach(function(s){ s.classList.remove('checked'); });
         } else {
           showMsg("Une erreur est survenue. Vous pouvez aussi nous écrire directement à contact@associationvivevoix.fr.", true);
         }
