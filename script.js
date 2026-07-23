@@ -73,16 +73,9 @@
   if(ageBtns.length){
     var slotGrid  = document.getElementById('slotGrid');
     var slotHint  = document.getElementById('slotHint');
-    var slotPrice = document.getElementById('slotPrice');
     var recap     = document.getElementById('recap');
     var recapSlot = document.getElementById('recapSlot');
     var slots     = document.querySelectorAll('.slot');
-
-    var tarifs = {
-      enfants : '300 € à l\u2019année · Enfants',
-      ados    : '350 € à l\u2019année · Adolescents',
-      adultes : '450 € à l\u2019année · Adultes'
-    };
 
     ageBtns.forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -103,9 +96,6 @@
 
         slotGrid.hidden = false;
         slotHint.textContent = count + (count > 1 ? ' créneaux disponibles' : ' créneau disponible') + ' pour ce public.';
-
-        slotPrice.hidden = false;
-        slotPrice.textContent = 'Tarif : ' + tarifs[age];
 
         if(recap) recap.hidden = true;
       });
