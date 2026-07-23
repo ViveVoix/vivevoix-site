@@ -177,4 +177,30 @@
       });
     }
   }
+
+  // ── Vidéo du hero : relance la lecture si le mobile a bloqué l'autoplay ──
+  var heroVid = document.querySelector('.hero-cine-video');
+  if(heroVid){
+    var tryPlay = function(){
+      var pr = heroVid.play();
+      if(pr && typeof pr.catch === 'function'){ pr.catch(function(){}); }
+    };
+
+    tryPlay();
+    heroVid.addEventListener('loadeddata', tryPlay);
+    heroVid.addEventListener('canplay', tryPlay);
+
+    // Certains mobiles n'autorisent la lecture qu'après une interaction
+    ['touchstart','click','scroll'].forEach(function(evt){
+      document.addEventListener(evt, function once(){
+        tryPlay();
+        document.removeEventListener(evt, once);
+      }, {passive:true});
+    });
+
+    // Si l'onglet redevient visible, on relance
+    document.addEventListener('visibilitychange', function(){
+      if(!document.hidden) tryPlay();
+    });
+  }
 })();
