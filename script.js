@@ -55,6 +55,7 @@
                      || document.querySelector('input[name="creneau"]:checked');
         data = {
           _subject     : 'Nouvelle demande d\u2019inscription — Vive Voix',
+          _replyto     : val('email'),
           Creneau      : creneauEl ? creneauEl.value : '(non sélectionné)',
           Participant  : val('participant'),
           Age          : val('age'),
@@ -73,6 +74,7 @@
       } else {
         data = {
           _subject : 'Nouveau message depuis le site — Vive Voix',
+          _replyto : val('email'),
           Nom      : val('nom'),
           email    : val('email'),
           Concerne : val('public'),
