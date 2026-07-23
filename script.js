@@ -67,17 +67,4 @@
       });
     });
   }
-
-  // Vidéo hero : si le fichier hero.mp4 est absent ou illisible, on garde
-  // le poster (photo) affiché via le fond. Rien à masquer en plein écran.
-  var heroVideo = document.querySelector('.hero-cine-video');
-  if(heroVideo){
-    var source = heroVideo.querySelector('source');
-    var showPoster = function(){
-      // en cas d'erreur, la vidéo garde son poster automatiquement
-      heroVideo.setAttribute('data-fallback','1');
-    };
-    if(source){ source.addEventListener('error', showPoster); }
-    heroVideo.addEventListener('error', showPoster);
-  }
 })();
