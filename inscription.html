@@ -39,30 +39,78 @@
   </div>
 </section>
 
-<!-- ── Étapes ── -->
+<!-- ── Choix du créneau ── -->
 <section class="pillars">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">Le principe</span>
-      <h2 class="title">Trois étapes, aucune complication</h2>
+      <span class="eyebrow">Étape 1</span>
+      <h2 class="title">Choisissez votre créneau</h2>
+      <p class="lead-2">Sélectionnez la tranche d'âge : seuls les créneaux disponibles pour ce public s'afficheront.</p>
     </div>
-    <div class="steps-grid">
-      <div class="step">
-        <span class="num">1</span>
-        <h3>Choisissez un créneau</h3>
-        <p>Consultez <a href="ateliers.html" style="color:var(--rose);text-decoration:underline">les créneaux</a> selon l'âge du participant : enfant, adolescent ou adulte.</p>
-      </div>
-      <div class="step">
-        <span class="num">2</span>
-        <h3>Vérifiez le tarif</h3>
-        <p>La grille tarifaire et les options de paiement fractionné sont détaillées sur <a href="tarifs.html" style="color:var(--rose);text-decoration:underline">la page Tarifs</a>.</p>
-      </div>
-      <div class="step">
-        <span class="num">3</span>
-        <h3>Complétez le formulaire</h3>
-        <p>Remplissez vos informations ci-dessous. Nous revenons vers vous rapidement pour finaliser l'inscription.</p>
-      </div>
+
+    <div class="age-picker">
+      <button type="button" class="age-btn" data-age="enfants">
+        <span class="age-t">Enfants</span>
+        <span class="age-s">Dès 7 ans</span>
+      </button>
+      <button type="button" class="age-btn" data-age="ados">
+        <span class="age-t">Adolescents</span>
+        <span class="age-s">12 à 17 ans</span>
+      </button>
+      <button type="button" class="age-btn" data-age="adultes">
+        <span class="age-t">Adultes</span>
+        <span class="age-s">Dès 18 ans</span>
+      </button>
     </div>
+
+    <p class="slot-hint" id="slotHint">Choisissez d'abord une tranche d'âge ci-dessus.</p>
+
+    <div class="slot-grid" id="slotGrid" hidden>
+      <label class="slot" data-for="enfants" hidden>
+        <input type="radio" name="creneau" value="Mercredi 16h – 17h · Enfants groupe 1">
+        <span class="slot-day">Mercredi</span>
+        <span class="slot-time">16h – 17h</span>
+        <span class="slot-who">Enfants · groupe 1</span>
+      </label>
+      <label class="slot" data-for="enfants" hidden>
+        <input type="radio" name="creneau" value="Mercredi 17h – 18h · Enfants groupe 2">
+        <span class="slot-day">Mercredi</span>
+        <span class="slot-time">17h – 18h</span>
+        <span class="slot-who">Enfants · groupe 2</span>
+      </label>
+      <label class="slot" data-for="ados" hidden>
+        <input type="radio" name="creneau" value="Mardi 17h – 18h30 · Adolescents">
+        <span class="slot-day">Mardi</span>
+        <span class="slot-time">17h – 18h30</span>
+        <span class="slot-who">Adolescents</span>
+      </label>
+      <label class="slot" data-for="ados" hidden>
+        <input type="radio" name="creneau" value="Mercredi 18h – 19h · Adolescents">
+        <span class="slot-day">Mercredi</span>
+        <span class="slot-time">18h – 19h</span>
+        <span class="slot-who">Adolescents</span>
+      </label>
+      <label class="slot" data-for="ados" hidden>
+        <input type="radio" name="creneau" value="Jeudi 17h – 18h30 · Adolescents">
+        <span class="slot-day">Jeudi</span>
+        <span class="slot-time">17h – 18h30</span>
+        <span class="slot-who">Adolescents</span>
+      </label>
+      <label class="slot" data-for="adultes" hidden>
+        <input type="radio" name="creneau" value="Mardi 18h30 – 20h30 · Adultes">
+        <span class="slot-day">Mardi</span>
+        <span class="slot-time">18h30 – 20h30</span>
+        <span class="slot-who">Adultes</span>
+      </label>
+      <label class="slot" data-for="adultes" hidden>
+        <input type="radio" name="creneau" value="Jeudi 18h30 – 20h30 · Adultes">
+        <span class="slot-day">Jeudi</span>
+        <span class="slot-time">18h30 – 20h30</span>
+        <span class="slot-who">Adultes</span>
+      </label>
+    </div>
+
+    <p class="slot-price" id="slotPrice" hidden></p>
   </div>
 </section>
 
@@ -83,8 +131,8 @@
 <section class="bg-white" style="background:#fff">
   <div class="wrap" style="max-width:640px;margin:0 auto">
     <div class="center" style="margin-bottom:12px">
-      <span class="eyebrow">Formulaire</span>
-      <h2 class="title" style="font-size:1.9rem">Votre demande d'inscription</h2>
+      <span class="eyebrow">Étape 2</span>
+      <h2 class="title" style="font-size:1.9rem">Vos coordonnées</h2>
     </div>
     <form class="vv" novalidate style="margin-top:36px">
       <div class="formmsg">Merci ! Votre demande d'inscription a bien été envoyée. Nous vous répondrons rapidement.</div>
@@ -92,29 +140,40 @@
         <label for="website">Ne pas remplir</label>
         <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
       </div>
+
+      <div class="recap" id="recap" hidden>
+        <span class="recap-label">Créneau sélectionné</span>
+        <strong id="recapSlot"></strong>
+      </div>
+
       <div class="field">
-        <label for="nom">Votre nom</label>
-        <input id="nom" name="nom" type="text" placeholder="Prénom et nom" required>
+        <label for="participant">Nom du participant</label>
+        <input id="participant" name="participant" type="text" placeholder="Prénom et nom" required>
       </div>
       <div class="field">
-        <label for="email">Votre e-mail</label>
+        <label for="age">Âge du participant</label>
+        <input id="age" name="age" type="number" min="7" max="99" placeholder="Ex : 14" required>
+      </div>
+
+      <div class="field" id="responsableField">
+        <label for="responsable">Nom du responsable légal <span style="font-weight:400;color:var(--grey)">(si le participant est mineur)</span></label>
+        <input id="responsable" name="responsable" type="text" placeholder="Prénom et nom">
+      </div>
+
+      <div class="field">
+        <label for="email">E-mail de contact</label>
         <input id="email" name="email" type="email" placeholder="vous@exemple.fr" required>
       </div>
       <div class="field">
-        <label for="public">Qui souhaite s'inscrire ?</label>
-        <select id="public" name="public">
-          <option value="">Sélectionnez</option>
-          <option>Un enfant (dès 7 ans)</option>
-          <option>Un adolescent (12 à 17 ans)</option>
-          <option>Un adulte (dès 18 ans)</option>
-        </select>
+        <label for="tel">Téléphone</label>
+        <input id="tel" name="tel" type="tel" placeholder="06 00 00 00 00">
       </div>
       <div class="field">
         <label for="message">Précisions (optionnel)</label>
-        <textarea id="message" name="message" placeholder="Créneau souhaité, questions particulières…"></textarea>
+        <textarea id="message" name="message" placeholder="Une question, une contrainte d'horaire, une demande particulière…"></textarea>
       </div>
-      <button type="submit" class="btn btn-rose">Envoyer mon inscription</button>
-      <p class="form-note">Réponse sous 24 à 48h. Vos coordonnées ne servent qu'à vous recontacter.</p>
+      <button type="submit" class="btn btn-rose">Envoyer ma demande d'inscription</button>
+      <p class="form-note">Réponse sous 24 à 48h. Vos coordonnées ne servent qu'à vous recontacter. Cette demande ne vaut pas inscription définitive : nous vous recontactons pour finaliser.</p>
     </form>
   </div>
 </section>

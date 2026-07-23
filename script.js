@@ -67,4 +67,73 @@
       });
     });
   }
+
+  // ── Page inscription : choix de la tranche d'âge puis du créneau ──
+  var ageBtns = document.querySelectorAll('.age-btn');
+  if(ageBtns.length){
+    var slotGrid  = document.getElementById('slotGrid');
+    var slotHint  = document.getElementById('slotHint');
+    var slotPrice = document.getElementById('slotPrice');
+    var recap     = document.getElementById('recap');
+    var recapSlot = document.getElementById('recapSlot');
+    var slots     = document.querySelectorAll('.slot');
+
+    var tarifs = {
+      enfants : '300 € à l\u2019année · Enfants',
+      ados    : '350 € à l\u2019année · Adolescents',
+      adultes : '450 € à l\u2019année · Adultes'
+    };
+
+    ageBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var age = btn.getAttribute('data-age');
+
+        ageBtns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+
+        var count = 0;
+        slots.forEach(function(s){
+          var match = s.getAttribute('data-for') === age;
+          s.hidden = !match;
+          s.classList.remove('checked');
+          var r = s.querySelector('input');
+          if(r) r.checked = false;
+          if(match) count++;
+        });
+
+        slotGrid.hidden = false;
+        slotHint.textContent = count + (count > 1 ? ' créneaux disponibles' : ' créneau disponible') + ' pour ce public.';
+
+        slotPrice.hidden = false;
+        slotPrice.textContent = 'Tarif : ' + tarifs[age];
+
+        if(recap) recap.hidden = true;
+      });
+    });
+
+    slots.forEach(function(s){
+      s.addEventListener('click', function(){
+        slots.forEach(function(o){ o.classList.remove('checked'); });
+        s.classList.add('checked');
+        var r = s.querySelector('input');
+        if(r){
+          r.checked = true;
+          if(recap && recapSlot){
+            recapSlot.textContent = r.value;
+            recap.hidden = false;
+          }
+        }
+      });
+    });
+
+    // Champ responsable légal : mis en avant si l'âge saisi est < 18
+    var ageInput = document.getElementById('age');
+    var respField = document.getElementById('responsableField');
+    if(ageInput && respField){
+      ageInput.addEventListener('input', function(){
+        var v = parseInt(ageInput.value, 10);
+        respField.style.display = (!isNaN(v) && v >= 18) ? 'none' : '';
+      });
+    }
+  }
 })();
