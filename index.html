@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="home">
+<body>
 
 <header class="site">
   <nav class="nav wrap">
@@ -35,22 +35,23 @@
   </nav>
 </header>
 
-<!-- ── HERO ── -->
-<section class="hero-fullbleed">
-  <video autoplay muted loop playsinline poster="assets/photo-hero.jpg">
+<!-- ── HERO IMMERSIF (vidéo plein écran) ── -->
+<section class="hero-cine">
+  <video class="hero-cine-video" autoplay muted loop playsinline poster="assets/photo-hero.jpg">
     <source src="assets/hero.mp4" type="video/mp4">
   </video>
-  <div class="wrap inner">
+  <div class="hero-cine-overlay"></div>
+  <div class="wrap hero-cine-inner">
     <span class="hero-tag"><span class="dot"></span> Éloquence &amp; théâtre · Lardenne, Toulouse</span>
-    <h1 class="hero-h">Savoir s'exprimer n'est pas un don.<br><em>Ça s'apprend.</em></h1>
-    <p class="hero-sub">Chez Vive Voix, on apprend à parler en public par la pratique. On monte sur scène, on ose, on se trompe, on recommence. Enfants, ados et adultes.</p>
+    <h1 class="hero-cine-h">Savoir s'exprimer<br>n'est pas un don.<br><em>Ça s'apprend.</em></h1>
+    <p class="hero-cine-sub">Chez Vive Voix, on apprend à parler en public par la pratique. On monte sur scène, on ose, on se trompe, on recommence. Enfants, ados et adultes.</p>
     <div class="hero-actions">
       <a href="contact.html" class="btn btn-rose">Découvrir nos ateliers
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a href="association.html" class="btn btn-line-white">Notre histoire</a>
     </div>
-    <div class="hero-meta">
+    <div class="hero-cine-meta">
       <div class="m"><b>Dès 7 ans</b><span>Enfants, ados, adultes</span></div>
       <div class="m"><b>Petits groupes</b><span>À taille humaine</span></div>
       <div class="m"><b>Lardenne</b><span>Ouest toulousain</span></div>
