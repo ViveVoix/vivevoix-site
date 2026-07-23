@@ -68,9 +68,9 @@ header.site{
   position:sticky;top:0;z-index:60;background:rgba(251,247,242,.88);
   backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
 }
-.nav{display:flex;align-items:center;justify-content:space-between;height:100px}
+.nav{display:flex;align-items:center;justify-content:space-between;height:132px}
 .nav .logo{display:flex;align-items:center;gap:12px}
-.nav .logo img{height:82px;width:auto}
+.nav .logo img{height:112px;width:auto}
 .nav ul{display:flex;gap:34px;list-style:none;align-items:center}
 .nav a.lnk{
   font-weight:500;font-size:.96rem;color:var(--navy);position:relative;padding:6px 0;
@@ -399,10 +399,10 @@ footer .copy a{text-decoration:underline}
   .hero-cine{min-height:80vh}
   .hero-cine-meta{gap:20px}
   .hero-cine-sub{max-width:none}
-  .nav{height:84px}
-  .nav .logo img{height:64px}
+  .nav{height:104px}
+  .nav .logo img{height:84px}
   .nav ul{
-    position:fixed;inset:84px 0 auto 0;background:var(--cream);flex-direction:column;
+    position:fixed;inset:104px 0 auto 0;background:var(--cream);flex-direction:column;
     padding:26px;gap:20px;border-bottom:1px solid var(--line);
     transform:translateY(-140%);transition:transform .32s ease;align-items:stretch;
   }
