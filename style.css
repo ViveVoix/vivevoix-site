@@ -342,6 +342,7 @@ h1.hero-h em{font-style:normal;color:inherit}
   max-width:1080px;margin:28px auto 0;
 }
 .intervenant-card{width:140px;text-align:center}
+.intervenant-card:has(.int-bio){width:230px}
 .intervenant-photo{
   width:140px;height:140px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);
   background:rgba(255,255,255,.12);margin:0 auto;
@@ -349,6 +350,12 @@ h1.hero-h em{font-style:normal;color:inherit}
 .intervenant-photo img{width:100%;height:100%;object-fit:cover}
 .intervenant-card span{
   display:block;margin-top:8px;color:rgba(255,255,255,.8);font-size:.82rem;
+}
+.intervenant-card .int-nom{
+  font-family:'Fraunces',serif;color:#fff;font-size:1.05rem;font-weight:600;margin-top:12px;
+}
+.intervenant-card .int-bio{
+  color:rgba(255,255,255,.78);font-size:.86rem;line-height:1.55;margin-top:8px;text-align:center;
 }
 
 /* ── Story (histoire fondateur) ── */
