@@ -241,11 +241,13 @@ h1.hero-h em{font-style:normal;color:inherit}
 .invite{background:var(--navy);color:#fff;position:relative;overflow:hidden}
 .invite::before{
   content:"";position:absolute;inset:0;z-index:0;
-  background:radial-gradient(circle at 80% 20%, rgba(217,63,114,.22), transparent 55%);
+  background:
+    radial-gradient(circle at 80% 20%, rgba(217,63,114,.22), transparent 55%),
+    linear-gradient(180deg, transparent 78%, var(--navy-deep) 100%);
 }
 .invite::after{
-  content:"";position:absolute;top:0;left:0;right:0;height:130px;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg, var(--cream) 0%, rgba(251,247,242,0) 100%);
+  content:"";position:absolute;top:0;left:0;right:0;height:190px;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg, var(--cream) 0%, rgba(251,247,242,0) 82%);
 }
 .invite-inner{max-width:720px;margin:0 auto;text-align:center;position:relative;z-index:2}
 .invite .date-badge{
@@ -448,10 +450,15 @@ h1.hero-h em{font-style:normal;color:inherit}
 
 /* ── Page hero (sous-pages) ── */
 .page-hero{background:var(--navy);color:#fff;padding:84px 0 76px;text-align:center;position:relative;overflow:hidden}
-.page-hero::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 20% 30%,rgba(217,63,114,.2),transparent 50%)}
+.page-hero::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(217,63,114,.2),transparent 50%),
+    linear-gradient(180deg, transparent 76%, var(--cream) 100%);
+}
 .page-hero::after{
-  content:"";position:absolute;top:0;left:0;right:0;height:90px;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 60%);
+  content:"";position:absolute;top:0;left:0;right:0;height:160px;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 78%);
 }
 .page-hero .inner{position:relative;z-index:2}
 .page-hero .crumb{font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:16px}
@@ -498,8 +505,12 @@ form.vv .btn-rose{width:100%}
 .qa .ans{padding:0 26px 24px;color:var(--grey);line-height:1.75}
 
 /* ── Footer ── */
-footer.site{background:var(--navy-deep);color:#aeb8cc;padding:66px 0 30px}
-footer .cols{display:grid;grid-template-columns:1.6fr 1fr 1.2fr;gap:48px}
+footer.site{background:var(--navy-deep);color:#aeb8cc;padding:66px 0 30px;position:relative;overflow:hidden}
+footer.site.footer-light-in::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:70px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg, var(--cream) 0%, rgba(251,247,242,0) 60%);
+}
+footer.site .cols{position:relative;z-index:1;display:grid;grid-template-columns:1.6fr 1fr 1.2fr;gap:48px}
 footer .logo img{height:58px;margin-bottom:18px}
 footer .slogan{font-family:'Fraunces',serif;font-style:italic;color:#fff;font-size:1.15rem;margin-bottom:12px}
 footer .about{font-size:.94rem;line-height:1.65;max-width:34ch;opacity:.85}
@@ -509,7 +520,15 @@ footer a:hover{color:#fff}
 footer .socials{display:flex;gap:12px;margin-top:20px}
 footer .socials a{width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,.09);display:grid;place-items:center;transition:.2s;color:#fff}
 footer .socials a:hover{background:var(--rose)}
-footer .copy{border-top:1px solid rgba(255,255,255,.1);margin-top:44px;padding-top:22px;text-align:center;font-size:.85rem;opacity:.6}
+footer .copy{border-top:1px solid rgba(255,255,255,.1);margin-top:44px;padding-top:22px;text-align:center;font-size:.85rem;opacity:.6;position:relative;z-index:1}
+
+/* ── Fondu de transition avant le footer (harmonisation continue) ── */
+.before-footer{position:relative;overflow:hidden}
+.before-footer::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:130px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg, rgba(7,22,52,0) 0%, var(--navy-deep) 100%);
+}
+.before-footer > .wrap{position:relative;z-index:1}
 footer .copy a{text-decoration:underline}
 
 /* ── Responsive ── */
