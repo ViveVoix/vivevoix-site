@@ -240,10 +240,14 @@ h1.hero-h em{font-style:normal;color:inherit}
 /* ── Bloc découverte / inauguration ── */
 .invite{background:var(--navy);color:#fff;position:relative;overflow:hidden}
 .invite::before{
-  content:"";position:absolute;inset:0;
+  content:"";position:absolute;inset:0;z-index:0;
   background:radial-gradient(circle at 80% 20%, rgba(217,63,114,.22), transparent 55%);
 }
-.invite-inner{max-width:720px;margin:0 auto;text-align:center;position:relative}
+.invite::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:130px;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg, var(--cream) 0%, rgba(251,247,242,0) 100%);
+}
+.invite-inner{max-width:720px;margin:0 auto;text-align:center;position:relative;z-index:2}
 .invite .date-badge{
   display:inline-block;background:var(--rose);color:#fff;font-weight:600;
   font-size:.85rem;letter-spacing:.06em;padding:9px 22px;border-radius:50px;margin-bottom:26px;
@@ -444,8 +448,12 @@ h1.hero-h em{font-style:normal;color:inherit}
 
 /* ── Page hero (sous-pages) ── */
 .page-hero{background:var(--navy);color:#fff;padding:84px 0 76px;text-align:center;position:relative;overflow:hidden}
-.page-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(217,63,114,.2),transparent 50%)}
-.page-hero .inner{position:relative}
+.page-hero::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 20% 30%,rgba(217,63,114,.2),transparent 50%)}
+.page-hero::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:90px;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 60%);
+}
+.page-hero .inner{position:relative;z-index:2}
 .page-hero .crumb{font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:16px}
 .page-hero .crumb a:hover{color:#fff}
 .page-hero h1{font-family:'Fraunces',serif;font-size:clamp(2.3rem,4.6vw,3.3rem);font-weight:600;line-height:1.1}
