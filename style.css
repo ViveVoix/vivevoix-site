@@ -241,7 +241,7 @@ h1.hero-h em{font-style:normal;color:inherit}
 .invite{
   max-width:var(--maxw);margin:24px auto 88px;padding:80px 48px;border-radius:28px;
   background:var(--navy);color:#fff;position:relative;overflow:hidden;
-  box-shadow:0 30px 60px rgba(11,36,91,.22);
+  box-shadow:0 16px 34px rgba(11,36,91,.13);
 }
 .invite::before{
   content:"";position:absolute;inset:0;z-index:0;
@@ -450,7 +450,7 @@ h1.hero-h em{font-style:normal;color:inherit}
 .page-hero{
   max-width:var(--maxw);margin:32px auto 56px;padding:70px 48px;border-radius:28px;
   background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden;
-  box-shadow:0 30px 60px rgba(11,36,91,.22);
+  box-shadow:0 16px 34px rgba(11,36,91,.13);
 }
 .page-hero::before{
   content:"";position:absolute;inset:0;z-index:0;
@@ -504,10 +504,8 @@ form.vv .btn-rose{width:100%}
 /* ── Footer ── */
 footer.site{background:var(--navy-deep);color:#aeb8cc;padding:66px 0 30px;position:relative;overflow:hidden}
 footer.site.footer-light-in::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:70px;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,
-    var(--cream) 0px, rgba(251,247,242,.8) 16px, rgba(251,247,242,.45) 32px,
-    rgba(251,247,242,.18) 48px, rgba(251,247,242,.05) 60px, rgba(251,247,242,0) 70px);
+  content:"";position:absolute;top:0;left:0;right:0;height:26px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg, var(--cream) 0%, rgba(251,247,242,0) 100%);
 }
 footer.site .cols{position:relative;z-index:1;display:grid;grid-template-columns:1.6fr 1fr 1.2fr;gap:48px}
 footer .logo img{height:58px;margin-bottom:18px}
@@ -524,10 +522,8 @@ footer .copy{border-top:1px solid rgba(255,255,255,.1);margin-top:44px;padding-t
 /* ── Fondu de transition avant le footer (harmonisation continue) ── */
 .before-footer{position:relative;overflow:hidden}
 .before-footer::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:150px;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,
-    rgba(7,22,52,0) 0px, rgba(7,22,52,.05) 60px, rgba(7,22,52,.18) 90px,
-    rgba(7,22,52,.45) 110px, rgba(7,22,52,.8) 130px, var(--navy-deep) 150px);
+  content:"";position:absolute;left:0;right:0;bottom:0;height:36px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg, rgba(7,22,52,0) 0%, var(--navy-deep) 100%);
 }
 .before-footer > .wrap{position:relative;z-index:1}
 
@@ -544,6 +540,13 @@ footer .copy{border-top:1px solid rgba(255,255,255,.1);margin-top:44px;padding-t
   background:linear-gradient(180deg, rgba(255,255,255,0) 0%, #fff 100%);
 }
 .fade-white-below > .wrap{position:relative;z-index:1}
+
+.fade-from-cream{position:relative;overflow:hidden}
+.fade-from-cream::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:80px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg, var(--cream) 0%, rgba(251,247,242,0) 100%);
+}
+.fade-from-cream > .wrap{position:relative;z-index:1}
 footer .copy a{text-decoration:underline}
 
 /* ── Responsive ── */
