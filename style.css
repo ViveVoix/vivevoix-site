@@ -239,15 +239,13 @@ h1.hero-h em{font-style:normal;color:inherit}
 
 /* ── Bloc découverte / inauguration ── */
 .invite{
-  color:#fff;position:relative;overflow:hidden;background-color:var(--navy);
-  background-image:
-    linear-gradient(180deg,
-      var(--cream) 0px, rgba(251,247,242,.8) 24px, rgba(251,247,242,.45) 48px,
-      rgba(251,247,242,.18) 72px, rgba(251,247,242,.05) 96px, rgba(251,247,242,0) 120px),
-    linear-gradient(180deg,
-      rgba(7,22,52,0) calc(100% - 150px), rgba(7,22,52,.08) calc(100% - 115px),
-      rgba(7,22,52,.28) calc(100% - 85px), rgba(7,22,52,.58) calc(100% - 55px),
-      rgba(7,22,52,.85) calc(100% - 25px), var(--navy-deep) 100%);
+  max-width:var(--maxw);margin:24px auto 88px;padding:80px 48px;border-radius:28px;
+  background:var(--navy);color:#fff;position:relative;overflow:hidden;
+  box-shadow:0 30px 60px rgba(11,36,91,.22);
+}
+.invite::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:radial-gradient(circle at 82% 15%, rgba(217,63,114,.24), transparent 45%);
 }
 .invite-inner{max-width:720px;margin:0 auto;text-align:center;position:relative;z-index:1}
 .invite .date-badge{
@@ -450,16 +448,15 @@ h1.hero-h em{font-style:normal;color:inherit}
 
 /* ── Page hero (sous-pages) ── */
 .page-hero{
-  color:#fff;padding:84px 0 76px;text-align:center;position:relative;overflow:hidden;background-color:var(--navy);
-  background-image:
-    linear-gradient(180deg,
-      var(--cream) 0px, rgba(251,247,242,.8) 20px, rgba(251,247,242,.45) 40px,
-      rgba(251,247,242,.18) 60px, rgba(251,247,242,.05) 80px, rgba(251,247,242,0) 100px),
-    linear-gradient(180deg,
-      rgba(251,247,242,0) calc(100% - 110px), rgba(251,247,242,.05) calc(100% - 88px),
-      rgba(251,247,242,.18) calc(100% - 66px), rgba(251,247,242,.45) calc(100% - 44px),
-      rgba(251,247,242,.8) calc(100% - 22px), var(--cream) 100%);
+  max-width:var(--maxw);margin:32px auto 56px;padding:70px 48px;border-radius:28px;
+  background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden;
+  box-shadow:0 30px 60px rgba(11,36,91,.22);
 }
+.page-hero::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:radial-gradient(circle at 15% 15%, rgba(217,63,114,.24), transparent 45%);
+}
+.page-hero .inner{position:relative;z-index:1}
 .page-hero .inner{position:relative;z-index:1}
 .page-hero .crumb{font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:16px}
 .page-hero .crumb a:hover{color:#fff}
@@ -574,6 +571,8 @@ footer .copy a{text-decoration:underline}
 @media(max-width:680px){
   body{font-size:16px}
   section{padding:68px 0}
+  .page-hero{margin:16px 14px 40px;padding:48px 26px;border-radius:20px}
+  .invite{margin:0 14px 48px;padding:48px 26px;border-radius:20px}
   .hero-cine{min-height:80vh}
   .hero-cine-meta{gap:20px}
   .hero-cine-sub{max-width:none}
