@@ -401,6 +401,7 @@ h1.hero-h em{font-style:normal;color:inherit}
 .price-card .amount{font-family:'Fraunces',serif;font-size:3rem;color:var(--rose);font-weight:600;margin:16px 0 4px;line-height:1}
 .price-card .amount small{font-size:1rem;color:var(--grey);font-weight:400}
 .price-card .per{color:var(--grey);font-size:.9rem}
+.price-card .hours{color:var(--navy);font-size:.85rem;margin-top:6px}
 .price-card .split{color:var(--rose);font-size:.85rem;font-weight:600;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
 .price-note{max-width:900px;margin:28px auto 0;text-align:center;color:var(--grey);font-size:.95rem}
 .price-note b{color:var(--navy)}
