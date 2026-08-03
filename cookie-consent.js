@@ -53,17 +53,21 @@
           '<img src="logo.png" alt="Vive Voix" style="height:56px;width:56px;flex-shrink:0;">' +
           '<a id="vv-cookie-continue" href="#" style="font-size:.85rem;color:#0B245B;font-weight:600;white-space:nowrap;text-decoration:none;">Continuer sans accepter →</a>' +
         '</div>' +
-        '<div style="font-family:\'Fraunces\',serif;font-weight:600;font-size:1.4rem;color:#0B245B;line-height:1.3;margin-bottom:16px;">Chez Vive Voix, on garde ça tout simple.</div>' +
+        '<div style="font-family:\'Fraunces\',serif;font-weight:600;font-size:1.4rem;color:#0B245B;line-height:1.3;margin-bottom:16px;">Vos préférences sur les cookies</div>' +
         '<div style="font-size:.92rem;line-height:1.6;margin-bottom:14px;">' +
-          "On aimerait activer Google Analytics pour comprendre comment le site est utilisé. Ça nous aide à :" +
+          "Vive Voix aimerait activer Google Analytics sur ce site pour mieux comprendre comment il est utilisé et continuer à l'améliorer au fil du temps. Concrètement, ça nous aide à :" +
         '</div>' +
-        '<ul style="font-size:.92rem;line-height:1.6;margin:0 0 16px;padding-left:20px;">' +
-          '<li style="margin-bottom:8px;"><strong>Savoir qui visite le site</strong>, sans jamais identifier personne.</li>' +
-          '<li style="margin-bottom:8px;"><strong>Voir quelles pages intéressent le plus</strong>, pour mieux les travailler.</li>' +
-          '<li><strong>Comprendre d\'où viennent les visites</strong> (Instagram, Facebook, Google...).</li>' +
+        '<ul style="font-size:.92rem;line-height:1.6;margin:0 0 14px;padding-left:20px;">' +
+          '<li style="margin-bottom:8px;"><strong>Savoir qui visite le site</strong>, sans jamais identifier personne individuellement.</li>' +
+          '<li style="margin-bottom:8px;"><strong>Voir quelles pages intéressent le plus</strong>, pour savoir lesquelles retravailler en priorité.</li>' +
+          '<li><strong>Comprendre d\'où viennent les visites</strong> (Instagram, Facebook, Google, ou directement) pour savoir où concentrer nos efforts de communication.</li>' +
         '</ul>' +
-        '<div style="font-size:.85rem;line-height:1.5;color:#6a6a6a;margin-bottom:22px;">' +
-          "Pas de publicité, pas de partage avec des tiers. Vous pouvez changer d'avis à tout moment via le bouton 🍪 en bas de l'écran." +
+        '<div style="font-size:.92rem;line-height:1.6;margin-bottom:6px;">' +
+          "Nous n'affichons aucune publicité et ne partageons rien avec des tiers commerciaux. Ces données servent uniquement en interne, à l'équipe de Vive Voix." +
+        '</div>' +
+        '<button id="vv-cookie-toggle" style="background:none;border:none;color:#0B245B;font-size:.85rem;font-weight:600;text-decoration:underline;cursor:pointer;padding:6px 0 14px;text-align:left;">En savoir plus ▾</button>' +
+        '<div id="vv-cookie-details" style="display:none;font-size:.85rem;line-height:1.6;color:#5a5a5a;background:#F4ECE1;border-radius:10px;padding:16px 18px;margin-bottom:16px;">' +
+          "Techniquement, Google Analytics dépose un cookie dans votre navigateur qui permet de compter les visites et de suivre le parcours sur le site (pages vues, provenance, type d'appareil), de façon agrégée. Ces informations sont anonymisées (adresse IP tronquée) et conservées par Google selon leurs propres règles de conservation. Aucune donnée n'est utilisée à des fins publicitaires, ni revendue, ni croisée avec d'autres sites. Si vous refusez, le site fonctionne exactement de la même façon : aucune fonctionnalité n'est limitée." +
         '</div>' +
         '<div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">' +
           '<button id="vv-cookie-manage" style="background:none;border:none;color:#0B245B;font-size:.9rem;font-weight:600;text-decoration:underline;cursor:pointer;padding:0;">Personnaliser mes choix</button>' +
@@ -74,6 +78,12 @@
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
 
+    document.getElementById("vv-cookie-toggle").addEventListener("click", function () {
+      var d = document.getElementById("vv-cookie-details");
+      var isOpen = d.style.display === "block";
+      d.style.display = isOpen ? "none" : "block";
+      this.textContent = isOpen ? "En savoir plus ▾" : "Voir moins ▴";
+    });
     document.getElementById("vv-cookie-accept").addEventListener("click", function () {
       setConsent("accepted");
     });
