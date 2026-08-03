@@ -27,32 +27,51 @@
   function hideBanner() {
     var el = document.getElementById("vv-cookie-banner");
     if (el) el.remove();
+    var ov = document.getElementById("vv-cookie-overlay");
+    if (ov) ov.remove();
   }
 
   function buildBanner() {
-    var wrap = document.createElement("div");
-    wrap.id = "vv-cookie-banner";
-    wrap.style.cssText =
-      "position:fixed;left:20px;right:20px;bottom:20px;max-width:480px;" +
-      "background:#FBF7F2;border:1px solid #F0DFE6;border-radius:18px;" +
-      "box-shadow:0 12px 32px rgba(11,36,91,.18);padding:22px 24px;" +
-      "font-family:'Inter Tight',Arial,sans-serif;z-index:99999;line-height:1.5;";
+    var overlay = document.createElement("div");
+    overlay.id = "vv-cookie-overlay";
+    overlay.style.cssText =
+      "position:fixed;inset:0;background:rgba(20,20,25,.55);z-index:99998;" +
+      "display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;";
 
-    wrap.innerHTML =
-      '<div style="font-family:\'Fraunces\',serif;font-weight:600;font-size:1.05rem;color:#0B245B;margin-bottom:6px;">On utilise quelques cookies 🍪</div>' +
-      '<div style="font-size:.9rem;color:#3a3a3a;margin-bottom:16px;">' +
-      "Juste pour comprendre comment le site est utilisé (Google Analytics), rien d'autre. Tu peux accepter ou refuser." +
+    var modal = document.createElement("div");
+    modal.id = "vv-cookie-banner";
+    modal.style.cssText =
+      "width:100%;max-width:760px;max-height:85vh;overflow:auto;background:#FBF7F2;" +
+      "border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.35);" +
+      "font-family:'Inter Tight',Arial,sans-serif;color:#3a3a3a;";
+
+    modal.innerHTML =
+      '<div style="padding:36px 40px 24px;">' +
+        '<div style="font-family:\'Fraunces\',serif;font-weight:600;font-size:1.6rem;color:#0B245B;margin-bottom:18px;">Bienvenue sur le site de Vive Voix</div>' +
+        '<div style="font-size:.95rem;line-height:1.65;margin-bottom:16px;">' +
+          "Pour comprendre combien de personnes visitent le site et comment il est utilisé, on aimerait activer Google Analytics. C'est le seul outil qu'on utilise, il n'y a pas de publicité ni de partage de données avec des tiers." +
+        '</div>' +
+        '<div style="font-size:.95rem;line-height:1.65;margin-bottom:20px;">' +
+          "Vous pouvez modifier votre choix à tout moment en cliquant sur « Gérer mes cookies » en bas de page." +
+        '</div>' +
+        '<a id="vv-cookie-continue" href="#" style="font-size:.9rem;color:#0B245B;font-weight:600;text-decoration:underline;cursor:pointer;">Continuer sans accepter ›</a>' +
       '</div>' +
-      '<div style="display:flex;gap:10px;flex-wrap:wrap;">' +
-      '<button id="vv-cookie-accept" style="flex:1;min-width:120px;background:#D93F72;color:#fff;border:none;border-radius:999px;padding:10px 18px;font-weight:600;font-size:.9rem;cursor:pointer;">Accepter</button>' +
-      '<button id="vv-cookie-refuse" style="flex:1;min-width:120px;background:transparent;color:#0B245B;border:1px solid #0B245B;border-radius:999px;padding:10px 18px;font-weight:600;font-size:.9rem;cursor:pointer;">Refuser</button>' +
-      "</div>";
+      '<div style="background:#F4ECE1;padding:20px 40px;border-radius:0 0 14px 14px;display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap;">' +
+        '<button id="vv-cookie-refuse" style="background:transparent;color:#0B245B;border:1px solid #0B245B;border-radius:8px;padding:13px 26px;font-weight:600;font-size:.9rem;cursor:pointer;">Refuser</button>' +
+        '<button id="vv-cookie-accept" style="background:#0B245B;color:#fff;border:none;border-radius:8px;padding:13px 26px;font-weight:600;font-size:.9rem;cursor:pointer;">Tout accepter</button>' +
+      '</div>';
 
-    document.body.appendChild(wrap);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
     document.getElementById("vv-cookie-accept").addEventListener("click", function () {
       setConsent("accepted");
     });
     document.getElementById("vv-cookie-refuse").addEventListener("click", function () {
+      setConsent("refused");
+    });
+    document.getElementById("vv-cookie-continue").addEventListener("click", function (e) {
+      e.preventDefault();
       setConsent("refused");
     });
   }
