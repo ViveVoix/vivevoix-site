@@ -36,40 +36,57 @@
     var overlay = document.createElement("div");
     overlay.id = "vv-cookie-overlay";
     overlay.style.cssText =
-      "position:fixed;inset:0;background:rgba(20,20,25,.35);z-index:99998;";
-    document.body.appendChild(overlay);
+      "position:fixed;inset:0;background:rgba(10,10,12,.6);z-index:99998;" +
+      "display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;";
 
     var modal = document.createElement("div");
     modal.id = "vv-cookie-banner";
     modal.style.cssText =
-      "position:fixed;left:0;right:0;bottom:0;width:100%;box-sizing:border-box;" +
-      "max-height:70vh;overflow:auto;background:#FBF7F2;" +
-      "box-shadow:0 -12px 40px rgba(0,0,0,.25);" +
-      "font-family:'Inter Tight',Arial,sans-serif;color:#3a3a3a;z-index:99999;";
+      "width:100%;max-width:960px;max-height:88vh;overflow:hidden;background:#FBF7F2;" +
+      "border-radius:16px;box-shadow:0 30px 70px rgba(0,0,0,.4);" +
+      "font-family:'Inter Tight',Arial,sans-serif;color:#3a3a3a;" +
+      "display:flex;";
 
     modal.innerHTML =
-      '<div style="padding:32px 40px 20px;max-width:1100px;margin:0 auto;">' +
-        '<div style="font-family:\'Fraunces\',serif;font-weight:600;font-size:1.4rem;color:#0B245B;margin-bottom:14px;">Bienvenue sur le site de Vive Voix</div>' +
-        '<div style="font-size:.95rem;line-height:1.6;margin-bottom:10px;">' +
-          "Pour comprendre combien de personnes visitent le site et comment il est utilisé, on aimerait activer Google Analytics. C'est le seul outil qu'on utilise, il n'y a pas de publicité ni de partage de données avec des tiers." +
+      '<div style="flex:0 0 38%;background-image:url(photo-hero.jpg);background-size:cover;background-position:center;display:none;" id="vv-cookie-img"></div>' +
+      '<div style="flex:1;padding:32px 36px;overflow:auto;display:flex;flex-direction:column;">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;gap:16px;">' +
+          '<img src="logo.png" alt="Vive Voix" style="height:56px;width:56px;flex-shrink:0;">' +
+          '<a id="vv-cookie-continue" href="#" style="font-size:.85rem;color:#0B245B;font-weight:600;white-space:nowrap;text-decoration:none;">Continuer sans accepter →</a>' +
         '</div>' +
-        '<div style="font-size:.95rem;line-height:1.6;margin-bottom:16px;">' +
-          "Vous pouvez changer d'avis à tout moment via le lien <strong>« Gérer mes cookies »</strong> tout en bas de chaque page." +
+        '<div style="font-family:\'Fraunces\',serif;font-weight:600;font-size:1.4rem;color:#0B245B;line-height:1.3;margin-bottom:16px;">Chez Vive Voix, on garde ça tout simple.</div>' +
+        '<div style="font-size:.92rem;line-height:1.6;margin-bottom:14px;">' +
+          "On aimerait activer Google Analytics pour comprendre comment le site est utilisé. Ça nous aide à :" +
         '</div>' +
-      '</div>' +
-      '<div style="background:#F4ECE1;padding:18px 40px;">' +
-        '<div style="max-width:1100px;margin:0 auto;display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap;">' +
-          '<button id="vv-cookie-refuse" style="background:transparent;color:#0B245B;border:1px solid #0B245B;border-radius:8px;padding:13px 26px;font-weight:600;font-size:.9rem;cursor:pointer;">Refuser</button>' +
-          '<button id="vv-cookie-accept" style="background:#0B245B;color:#fff;border:none;border-radius:8px;padding:13px 26px;font-weight:600;font-size:.9rem;cursor:pointer;">Tout accepter</button>' +
+        '<ul style="font-size:.92rem;line-height:1.6;margin:0 0 16px;padding-left:20px;">' +
+          '<li style="margin-bottom:8px;"><strong>Savoir qui visite le site</strong>, sans jamais identifier personne.</li>' +
+          '<li style="margin-bottom:8px;"><strong>Voir quelles pages intéressent le plus</strong>, pour mieux les travailler.</li>' +
+          '<li><strong>Comprendre d\'où viennent les visites</strong> (Instagram, Facebook, Google...).</li>' +
+        '</ul>' +
+        '<div style="font-size:.85rem;line-height:1.5;color:#6a6a6a;margin-bottom:22px;">' +
+          "Pas de publicité, pas de partage avec des tiers. Vous pouvez changer d'avis à tout moment via le bouton 🍪 en bas de l'écran." +
+        '</div>' +
+        '<div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">' +
+          '<button id="vv-cookie-manage" style="background:none;border:none;color:#0B245B;font-size:.9rem;font-weight:600;text-decoration:underline;cursor:pointer;padding:0;">Personnaliser mes choix</button>' +
+          '<button id="vv-cookie-accept" style="background:#0B245B;color:#fff;border:none;border-radius:999px;padding:14px 28px;font-weight:600;font-size:.9rem;cursor:pointer;white-space:nowrap;">Accepter et fermer</button>' +
         '</div>' +
       '</div>';
 
-    document.body.appendChild(modal);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    if (window.innerWidth > 720) {
+      document.getElementById("vv-cookie-img").style.display = "block";
+    }
 
     document.getElementById("vv-cookie-accept").addEventListener("click", function () {
       setConsent("accepted");
     });
-    document.getElementById("vv-cookie-refuse").addEventListener("click", function () {
+    document.getElementById("vv-cookie-continue").addEventListener("click", function (e) {
+      e.preventDefault();
+      setConsent("refused");
+    });
+    document.getElementById("vv-cookie-manage").addEventListener("click", function () {
       setConsent("refused");
     });
   }
