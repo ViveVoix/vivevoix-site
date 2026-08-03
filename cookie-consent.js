@@ -42,13 +42,12 @@
     var modal = document.createElement("div");
     modal.id = "vv-cookie-banner";
     modal.style.cssText =
-      "width:100%;max-width:960px;max-height:88vh;overflow:hidden;background:#FBF7F2;" +
+      "width:100%;max-width:640px;max-height:88vh;overflow:hidden;background:#FBF7F2;" +
       "border-radius:16px;box-shadow:0 30px 70px rgba(0,0,0,.4);" +
       "font-family:'Inter Tight',Arial,sans-serif;color:#3a3a3a;" +
       "display:flex;";
 
     modal.innerHTML =
-      '<div style="flex:0 0 38%;background-image:url(photo-hero.jpg);background-size:cover;background-position:center;display:none;" id="vv-cookie-img"></div>' +
       '<div style="flex:1;padding:32px 36px;overflow:auto;display:flex;flex-direction:column;">' +
         '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;gap:16px;">' +
           '<img src="logo.png" alt="Vive Voix" style="height:56px;width:56px;flex-shrink:0;">' +
@@ -74,10 +73,6 @@
 
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
-
-    if (window.innerWidth > 720) {
-      document.getElementById("vv-cookie-img").style.display = "block";
-    }
 
     document.getElementById("vv-cookie-accept").addEventListener("click", function () {
       setConsent("accepted");
