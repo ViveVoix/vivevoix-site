@@ -403,6 +403,7 @@ h1.hero-h em{font-style:normal;color:inherit}
 .price-card .per{color:var(--grey);font-size:.9rem}
 .price-card .hours{color:var(--navy);font-size:.85rem;margin-top:6px}
 .price-card .split{color:var(--rose);font-size:.85rem;font-weight:600;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.price-card .fee-note{color:var(--grey);font-size:.8rem;line-height:1.4;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
 .price-note{max-width:900px;margin:28px auto 0;text-align:center;color:var(--grey);font-size:.95rem}
 .price-note b{color:var(--navy)}
 .installment-badge{
@@ -410,6 +411,29 @@ h1.hero-h em{font-style:normal;color:inherit}
   background:var(--rose-soft);color:var(--rose);font-weight:600;font-size:.95rem;
   padding:10px 22px;border-radius:99px;
 }
+.limited-badge{
+  max-width:fit-content;margin:0 auto 28px;text-align:center;
+  background:var(--navy);color:#fff;font-weight:600;font-size:.85rem;
+  letter-spacing:.04em;text-transform:uppercase;
+  padding:9px 24px;border-radius:99px;
+}
+.terms-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  max-width:900px;margin:44px auto 0;
+}
+.term{
+  display:flex;align-items:center;gap:14px;
+  background:var(--cream);border:1px solid var(--line);border-radius:8px;
+  padding:16px 20px;
+}
+.term-num{
+  flex:none;width:32px;height:32px;border-radius:50%;
+  background:var(--rose);color:#fff;font-family:'Fraunces',serif;font-weight:600;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.term-body{display:flex;flex-direction:column}
+.term-body b{font-family:'Fraunces',serif;color:var(--navy);font-size:1rem;font-weight:600}
+.term-body span{color:var(--grey);font-size:.82rem}
 
 /* ── Values (mission) ── */
 .values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:52px}
@@ -560,6 +584,7 @@ footer .copy a{text-decoration:underline}
   .story-inner{grid-template-columns:1fr;gap:40px}
   .story-photo{max-width:420px;margin:0 auto;order:-1}
   .price-grid{grid-template-columns:1fr;max-width:400px}
+  .terms-strip{grid-template-columns:1fr;max-width:400px}
   .values-grid{grid-template-columns:1fr}
   .age-picker{grid-template-columns:1fr;max-width:400px}
   .slot-grid{grid-template-columns:1fr;max-width:400px}
