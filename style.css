@@ -685,7 +685,7 @@ footer .copy a{text-decoration:underline}
 }
 
 /* ── Barre documents (fiche présentation + formulaire d'inscription) ── */
-.docs-bar{background:var(--cream-deep);border-bottom:1px solid rgba(11,36,91,.08)}
+.docs-bar{background:transparent;border-bottom:none}
 .docs-bar .wrap{display:flex;gap:14px;justify-content:center;align-items:center;padding:16px 24px;flex-wrap:wrap}
 .docs-bar .docs-label{font-size:.82rem;font-weight:600;letter-spacing:.02em;color:var(--navy);opacity:.65;margin-right:4px}
 .docs-bar a{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:700;color:var(--navy);padding:9px 18px;border:1.5px solid rgba(11,36,91,.18);border-radius:30px;text-decoration:none;background:#fff;transition:.2s ease}
