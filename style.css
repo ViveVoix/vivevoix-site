@@ -553,7 +553,7 @@ footer.site.footer-light-in::before{
   background:var(--wave-cream) no-repeat top/100% 100%;
   transform:scaleY(-1);
 }
-footer.site .cols{position:relative;z-index:1;display:grid;grid-template-columns:1.6fr 1fr 1.2fr;gap:48px}
+footer.site .cols{position:relative;z-index:1;display:grid;grid-template-columns:1.4fr .9fr 1fr 1.1fr;gap:40px}
 footer .logo img{height:58px;margin-bottom:18px}
 footer .slogan{font-family:'Fraunces',serif;font-style:italic;color:#fff;font-size:1.15rem;margin-bottom:12px}
 footer .about{font-size:.94rem;line-height:1.65;max-width:34ch;opacity:.85}
