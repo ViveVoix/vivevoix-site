@@ -1,7 +1,7 @@
 /* Vive Voix — pop-up d'information (mise à jour des horaires et de la date d'inauguration)
    Affiché une fois par visite (par onglet). Pour le désactiver : passer ACTIVE à false. */
 (function () {
-  var ACTIVE = true;
+  var ACTIVE = false;
   var IMAGE = "info-mise-a-jour.jpg";
   var STORAGE_KEY = "vv_popup_maj_2026_09"; // change la valeur pour ré-afficher le pop-up à tout le monde
 
