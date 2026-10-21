@@ -269,7 +269,7 @@
 
   // Hero : « Ici, on apprend à parler / convaincre / s'affirmer »
   var rot = document.getElementById('rot');
-  if(rot && !reduce){
+  if(rot && !reduce && !document.documentElement.classList.contains('fx')){
     var words = ['parler', 'convaincre', "s'affirmer"], i = 0;
     rot.textContent = words[0];
     setInterval(function(){

@@ -13,11 +13,21 @@
 <meta name="theme-color" content="#0B245B">
 <link rel="preload" href="fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
+<script>
+(function(){var d=document.documentElement;try{
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+d.classList.add('fx');
+if(sessionStorage.getItem('vv_wipe')){d.classList.add('wipe-in');sessionStorage.removeItem('vv_wipe');}
+else if(!sessionStorage.getItem('vv_intro')&&/(^|\/)(index(\.html)?)?$/.test(location.pathname)){d.classList.add('intro');}
+setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(fx|intro|wipe-in)\b/g,'');}},6000);
+}catch(e){}})();
+</script>
 <script src="cookie-consent.js" defer></script>
 <script src="popup-info.js" defer></script>
 </head>
 <body>
+<div id="wipe" aria-hidden="true"></div>
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="site">
   <nav class="nav wrap" aria-label="Navigation principale">
@@ -185,6 +195,7 @@
   <div class="copy">© 2026 Vive Voix · Association d'art oratoire · <a href="mentions-legales.html">Mentions légales</a> · <a href="#" onclick="vvOpenCookieChoice();return false;">Gérer mes cookies</a></div>
 </footer>
 
-<script src="script.js?v=3"></script>
+<script src="script.js?v=4"></script>
+<script src="fx.js?v=4"></script>
 </body>
 </html>
