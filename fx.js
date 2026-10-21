@@ -227,6 +227,24 @@
   var cards = $$('.scard'), stickyTop = [];
   var pageHero = $('.page-hero'), heroH = $$('.hero-h .l'), parImgs = $$('.team-photo img,.intervenant-photo img');
   var cfUpdate = null, cfStep = null;
+  var oband = $('.ob-track'), ox = 0, ohalf = 0;
+  if (oband) { var omeasure = function () { ohalf = oband.scrollWidth / 2; ox = -ohalf * 0.5; }; omeasure(); window.addEventListener('resize', omeasure); if (document.fonts && document.fonts.ready) document.fonts.ready.then(omeasure); }
+  // défilement fluide à inertie (souris uniquement)
+  var sTarget = window.scrollY, sCur = window.scrollY, sLast = window.scrollY, sOn = false;
+  if (fine) {
+    sOn = true; root.classList.add('smooth');
+    window.addEventListener('wheel', function (e) {
+      if (e.ctrlKey || e.defaultPrevented || document.body.classList.contains('menu-open')) return;
+      if (e.target.closest && e.target.closest('textarea,select')) return;
+      e.preventDefault();
+      var d = e.deltaMode === 1 ? e.deltaY * 34 : (e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY);
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      sTarget = clamp(sTarget + d * 0.95, 0, max);
+    }, { passive: false });
+    window.addEventListener('scroll', function () {
+      if (Math.abs(window.scrollY - sLast) > 2) { sCur = sTarget = sLast = window.scrollY; } // clavier, ancre, barre de défilement…
+    }, { passive: true });
+  }
   function measureCards() {
     stickyTop = cards.map(function (c) { return parseFloat(getComputedStyle(c).top) || 0; });
   }
@@ -296,6 +314,16 @@
       ang += (clamp(vx * 2.4, -42, 42) - ang) * 0.16;
       msc += (mscT - msc) * 0.2;
       mic.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0) rotate(' + ang.toFixed(1) + 'deg) scale(' + msc.toFixed(3) + ')';
+    }
+    if (oband && ohalf) {
+      ox += 0.7 + vel * 0.45;
+      if (ox >= 0) ox -= ohalf; if (ox < -ohalf) ox += ohalf;
+      oband.style.transform = 'translate3d(' + ox.toFixed(1) + 'px,0,0)';
+    }
+    if (sOn && Math.abs(sTarget - sCur) > 0.05) {
+      sCur += (sTarget - sCur) * 0.1;
+      if (Math.abs(sTarget - sCur) < 0.4) sCur = sTarget;
+      sLast = sCur; window.scrollTo(0, sCur);
     }
     if (cfStep) cfStep();
     requestAnimationFrame(frame);

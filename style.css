@@ -774,3 +774,27 @@ html.mic-on select{cursor:pointer!important}
 .vvwave .a3{animation-delay:.18s}
 @keyframes vvw{0%{opacity:0;transform:scale(.5)}20%{opacity:1}100%{opacity:0;transform:scale(1.45)}}
 @media (hover:none){ #mic,.vvwave{display:none} }
+
+
+/* ==========================================================================
+   V6 — scène 3D derrière toute la page, sections transparentes, contour géant
+   ========================================================================== */
+body{background:var(--navy)}
+section{background:var(--white)}
+.hero,.statement,.stats,.reel-sec{background:transparent}
+footer.site{background:transparent}
+#stage{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.4s ease}
+#stage.on{opacity:1}
+#stage canvas{width:100%!important;height:100%!important;display:block}
+.hero-3d{display:none}
+html.smooth{scroll-behavior:auto}
+
+/* texte contour géant qui défile (sens inverse du bandeau rose) */
+.outline-band{overflow:hidden;white-space:nowrap;margin-top:clamp(48px,7vw,96px)}
+.ob-track{display:inline-flex;will-change:transform;animation:obm 70s linear infinite reverse}
+.ob-track span{font-family:var(--f-display);text-transform:uppercase;font-size:clamp(5rem,14vw,13rem);line-height:.95;color:transparent;-webkit-text-stroke:2px var(--navy);padding-right:.45em;display:inline-flex;align-items:center}
+.ob-track span:nth-child(3n+2){color:var(--rose);-webkit-text-stroke:0}
+.ob-track span::after{content:"";width:.15em;height:.15em;border-radius:50%;background:var(--navy);margin-left:.45em;display:inline-block}
+@keyframes obm{to{transform:translateX(-50%)}}
+html.fx .ob-track{animation:none}
+@media (prefers-reduced-motion:reduce){.ob-track{animation:none}}
