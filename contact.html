@@ -18,7 +18,7 @@
 (function(){var d=document.documentElement;try{
 if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
 d.classList.add('fx');
-if(sessionStorage.getItem('vv_wipe')){d.classList.add('wipe-in');sessionStorage.removeItem('vv_wipe');}
+if(sessionStorage.getItem('vv_wipe')){d.classList.add('wipe-in');sessionStorage.removeItem('vv_wipe');var w=sessionStorage.getItem('vv_wipe_w');if(w){d.style.setProperty('--ww','"'+w.replace(/["\\]/g,'')+'"');}}
 else if(!sessionStorage.getItem('vv_intro')&&/(^|\/)(index(\.html)?)?$/.test(location.pathname)){d.classList.add('intro');}
 setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(fx|intro|wipe-in)\b/g,'');}},6000);
 }catch(e){}})();
@@ -27,7 +27,7 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 <script src="popup-info.js" defer></script>
 </head>
 <body>
-<div id="wipe" aria-hidden="true"></div>
+<div id="wipe" aria-hidden="true"><div class="wl l1"></div><div class="wl l2"></div><div class="wl l3"></div><div class="wipe-word"></div></div>
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="site dark">
   <nav class="nav wrap" aria-label="Navigation principale">

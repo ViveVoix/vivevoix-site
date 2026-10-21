@@ -491,11 +491,6 @@ html.intro body{overflow:hidden}
 #curtain .bar i{display:block;height:100%;background:var(--rose);transform:scaleX(0);transform-origin:left}
 
 /* transition entre les pages */
-#wipe{position:fixed;inset:0;z-index:99996;pointer-events:none;background:var(--navy);transform:scaleY(0);transform-origin:top;display:none}
-#wipe::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--rose)}
-html.fx #wipe{display:block;transition:transform .65s cubic-bezier(.77,0,.18,1)}
-html.fx #wipe.cover{transform:scaleY(1);transform-origin:bottom;pointer-events:all}
-html.fx.wipe-in #wipe{transform:scaleY(1);transform-origin:top;transition:none}
 
 /* hero : entrée en scène */
 html.fx .hero-h .l{overflow:hidden;padding-bottom:.07em;margin-bottom:-.07em}
@@ -798,3 +793,44 @@ html.smooth{scroll-behavior:auto}
 @keyframes obm{to{transform:translateX(-50%)}}
 html.fx .ob-track{animation:none}
 @media (prefers-reduced-motion:reduce){.ob-track{animation:none}}
+
+
+/* ==========================================================================
+   V7 — Apparitions « rideau de scène » + transition de page en vagues
+   ========================================================================== */
+/* transition de page : trois vagues de couleur + nom de la page en géant */
+#wipe{position:fixed;inset:0;z-index:99996;pointer-events:none;overflow:hidden;display:none}
+html.fx #wipe{display:block}
+#wipe.cover{pointer-events:all}
+#wipe .wl{position:absolute;inset:0;transform:translateY(calc(100% + 120px))}
+#wipe .wl::before{content:"";position:absolute;left:0;right:0;top:-119px;height:120px;background:inherit;
+  -webkit-mask:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath d='M0 120V62C180 16 360 16 540 56S900 112 1080 66 1320 10 1440 46V120Z'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+          mask:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath d='M0 120V62C180 16 360 16 540 56S900 112 1080 66 1320 10 1440 46V120Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+#wipe .l1{background:var(--rose)}
+#wipe .l2{background:#fff}
+#wipe .l3{background:var(--navy)}
+#wipe .wipe-word{position:absolute;left:var(--gut);bottom:9vh;z-index:5;font-family:var(--f-display);font-size:clamp(5rem,17vw,16rem);line-height:.85;text-transform:uppercase;color:var(--rose);opacity:0;transform:translateY(50px);white-space:nowrap}
+#wipe .wipe-word::before{content:var(--ww,"")}
+html.fx #wipe.cover .wl{transform:translateY(0);transition:transform .85s cubic-bezier(.77,0,.18,1)}
+html.fx #wipe.cover .l2{transition-delay:.08s}
+html.fx #wipe.cover .l3{transition-delay:.16s}
+html.fx #wipe.cover .wipe-word{opacity:1;transform:none;transition:opacity .4s ease .62s,transform .7s cubic-bezier(.16,1,.3,1) .58s}
+html.fx.wipe-in #wipe .wl{transform:translateY(0);transition:none}
+html.fx.wipe-in #wipe .wipe-word{opacity:1;transform:none;transition:none}
+html.fx.wipe-out #wipe .wl{transform:translateY(calc(-100% - 120px));transition:transform .95s cubic-bezier(.77,0,.18,1)}
+html.fx.wipe-out #wipe .l3{transition-delay:0s}
+html.fx.wipe-out #wipe .l2{transition-delay:.09s}
+html.fx.wipe-out #wipe .l1{transition-delay:.18s}
+html.fx.wipe-out #wipe .wipe-word{opacity:0;transform:translateY(-40px);transition:opacity .35s ease,transform .5s ease}
+
+/* apparitions : balayage de rideau (alternance gauche / droite) */
+html.fx .fxr{opacity:1;transform:none;clip-path:inset(0 100% 0 0)}
+html.fx .fxr.wr{clip-path:inset(0 0 0 100%)}
+html.fx .fxr.in{clip-path:inset(0 0 0 0);transition:clip-path 1.05s cubic-bezier(.77,0,.18,1) calc(var(--d,0)*1s)}
+html.fx .fxr.in.done{clip-path:none;transition:none}
+/* grosses cartes : ouverture « portes de scène » en 3D */
+html.fx .fxr.f3{clip-path:none;opacity:0;transform:perspective(1200px) rotateY(-42deg) translateX(-40px);transform-origin:0 50%}
+html.fx .fxr.f3.wr{transform:perspective(1200px) rotateY(42deg) translateX(40px);transform-origin:100% 50%}
+html.fx .fxr.f3.in{opacity:1;transform:none;transition:opacity .6s ease calc(var(--d,0)*1s),transform 1.15s cubic-bezier(.16,1,.3,1) calc(var(--d,0)*1s)}
+html.fx .fxr.f3.in.done{transition:none}
+html.fx .fxr:not(.f3){will-change:auto}
