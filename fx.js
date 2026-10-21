@@ -222,7 +222,7 @@
     fab.className = 'fab btn btn-rose'; fab.href = 'inscription.html'; fab.textContent = "S'inscrire";
     document.body.appendChild(fab);
   }
-  var eq = null, eqBars = [], cx = 0, cy = 0, tx = 0, ty = 0, curShown = false, lvl = 0;
+  var mic = null, cx = 0, cy = 0, tx = 0, ty = 0, lastTx = 0, curShown = false, ang = 0, msc = 1, mscT = 1;
   var pmx = 0, pmy = 0, hx = 0, hy = 0;
   var cards = $$('.scard'), stickyTop = [];
   var pageHero = $('.page-hero'), heroH = $$('.hero-h .l'), parImgs = $$('.team-photo img,.intervenant-photo img');
@@ -289,15 +289,13 @@
         if (heroMedia) heroMedia.style.transform = 'rotateY(' + (hx * 7).toFixed(2) + 'deg) rotateX(' + (-hy * 5).toFixed(2) + 'deg)';
       }
     }
-    // barres de son qui suivent la souris
-    if (eq && curShown) {
-      cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
-      eq.style.transform = 'translate3d(' + (cx + 16).toFixed(1) + 'px,' + (cy + 10).toFixed(1) + 'px,0)';
-      lvl *= 0.93;
-      var now = performance.now();
-      for (var k = 0; k < eqBars.length; k++) {
-        eqBars[k].style.height = (5 + (0.5 + 0.5 * Math.sin(now * (0.006 + k * 0.0023) + k * 1.7)) * (4 + lvl * 20)).toFixed(1) + 'px';
-      }
+    // le curseur est un micro : il suit la souris, se penche selon la vitesse
+    if (mic && curShown) {
+      cx += (tx - cx) * 0.55; cy += (ty - cy) * 0.55;
+      var vx = tx - lastTx; lastTx = tx;
+      ang += (clamp(vx * 2.4, -42, 42) - ang) * 0.16;
+      msc += (mscT - msc) * 0.2;
+      mic.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0) rotate(' + ang.toFixed(1) + 'deg) scale(' + msc.toFixed(3) + ')';
     }
     if (cfStep) cfStep();
     requestAnimationFrame(frame);
@@ -306,25 +304,38 @@
 
   /* ---------- 9. Souris : barres de son, boutons magnétiques, cartes inclinées ---------- */
   if (fine) {
-    eq = document.createElement('div'); eq.id = 'eq';
-    for (var bi = 0; bi < 4; bi++) { var bar = document.createElement('i'); eq.appendChild(bar); eqBars.push(bar); }
-    document.body.appendChild(eq);
+    mic = document.createElement('div'); mic.id = 'mic'; mic.setAttribute('aria-hidden', 'true');
+    mic.innerHTML = '<svg viewBox="0 0 28 44" width="28" height="44"><path class="mb" d="M9 24h10l-1.6 16.4Q14 43 10.6 40.4z"/><rect class="mc" x="7" y="19.6" width="14" height="4.6" rx="2.3"/><ellipse class="mh" cx="14" cy="11" rx="9" ry="10"/><path class="mg" d="M5.8 8.2h16.4M5.2 12h17.6M6.4 15.8h15.2M10 2.4v17.2M14 1v20M18 2.4v17.2"/></svg>';
+    document.body.appendChild(mic);
+    var FIELD = 'input,textarea,select,[contenteditable]';
     document.addEventListener('mousemove', function (e) {
-      var dx = e.clientX - tx, dy = e.clientY - ty;
-      lvl = Math.min(lvl + Math.hypot(dx, dy) * 0.012, 1);
       tx = e.clientX; ty = e.clientY;
       pmx = (e.clientX / window.innerWidth) * 2 - 1; pmy = (e.clientY / window.innerHeight) * 2 - 1;
-      if (!curShown) { cx = tx; cy = ty; curShown = true; eq.classList.add('on'); }
+      if (!curShown) { cx = tx; cy = ty; lastTx = tx; curShown = true; root.classList.add('mic-on'); mic.classList.add('on'); }
       var t = e.target, lbl = '';
       if (t.closest) {
+        mic.classList.toggle('off', !!t.closest(FIELD));
         if (t.closest('.reel')) lbl = 'Glisser';
         else if (t.closest('.scard')) lbl = 'Voir';
       }
-      eq.classList.toggle('lbl', !!lbl);
-      if (lbl) eq.setAttribute('data-l', lbl);
-      eq.classList.toggle('hov', !lbl && !!(t.closest && t.closest('a,button,summary,label,input,select,textarea')));
+      mic.classList.toggle('lbl', !!lbl);
+      if (lbl) mic.setAttribute('data-l', lbl);
+      var hv = !lbl && !!(t.closest && t.closest('a,button,summary,label'));
+      mic.classList.toggle('hov', hv);
+      mscT = hv ? 1.3 : 1;
     }, { passive: true });
-    document.addEventListener('mouseleave', function () { eq.classList.remove('on'); curShown = false; });
+    document.addEventListener('mouseleave', function () { mic.classList.remove('on'); root.classList.remove('mic-on'); curShown = false; });
+    document.addEventListener('mouseenter', function () { /* réactivé au prochain mouvement */ });
+    // au clic : des ondes sonores partent du micro
+    document.addEventListener('mousedown', function (e) {
+      if (mic.classList.contains('off')) return;
+      var w = document.createElement('div'); w.className = 'vvwave';
+      w.style.left = e.clientX + 'px'; w.style.top = e.clientY + 'px';
+      w.style.setProperty('--r', (-24 + Math.random() * 14).toFixed(0) + 'deg');
+      w.innerHTML = '<svg viewBox="-50 -50 100 100"><g class="a1"><path d="M17-13A21 21 0 0 1 17 13"/></g><g class="a2"><path d="M27-20A33 33 0 0 1 27 20"/></g><g class="a3"><path d="M37-27A46 46 0 0 1 37 27"/></g></svg>';
+      document.body.appendChild(w);
+      setTimeout(function () { if (w.parentNode) w.parentNode.removeChild(w); }, 1100);
+    });
 
     $$('.btn').forEach(function (b) {
       if (b.classList.contains('fab')) return;

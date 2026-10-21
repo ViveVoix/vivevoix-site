@@ -728,13 +728,6 @@ body.menu-open header.site .logo{visibility:hidden}
 /* ----- carte 3D au survol ----- */
 .tilt{transform-style:preserve-3d}
 
-/* ----- curseur « barres de son » ----- */
-#eq{position:fixed;left:0;top:0;z-index:99997;pointer-events:none;display:flex;align-items:flex-end;gap:3px;height:26px;opacity:0;transition:opacity .25s}
-#eq.on{opacity:1}
-#eq i{display:block;width:4px;height:6px;border-radius:2px;background:var(--rose);outline:1.5px solid #fff}
-#eq.hov i{background:var(--navy)}
-#eq.lbl::after{content:attr(data-l);margin-left:8px;align-self:center;background:var(--rose);color:#fff;font-weight:700;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:999px;outline:1.5px solid #fff}
-#cur{display:none!important}
 
 /* titres : bascule 3D à la place du simple glissement */
 html.fx .sp{perspective:800px}
@@ -753,8 +746,31 @@ html.fx .fxi.in{scale:1.1}
   .reel.cf{--cw:clamp(180px,56vw,260px)}
   .page-hero::before{font-size:clamp(9rem,44vw,16rem)}
 }
-@media (hover:none){ #eq{display:none} }
 
 html.fx .invite.cta-rose .split em .sp > i{color:var(--navy)}
 
 .invite.cta-rose h2{margin-bottom:36px}
+
+/* ----- curseur micro ----- */
+html.mic-on,html.mic-on *{cursor:none!important}
+html.mic-on input,html.mic-on textarea,html.mic-on select,html.mic-on [contenteditable]{cursor:text!important}
+html.mic-on select{cursor:pointer!important}
+#mic{position:fixed;left:0;top:0;width:28px;height:44px;margin:-11px 0 0 -14px;pointer-events:none;z-index:99997;opacity:0;transform-origin:14px 11px;transition:opacity .2s;will-change:transform}
+#mic.on{opacity:1}
+#mic.off{opacity:0}
+#mic svg{display:block;overflow:visible}
+#mic .mh{fill:var(--rose);stroke:#fff;stroke-width:1.7;transition:fill .25s}
+#mic .mg{fill:none;stroke:rgba(255,255,255,.75);stroke-width:.9}
+#mic .mc{fill:#fff;stroke:var(--navy);stroke-width:1}
+#mic .mb{fill:var(--navy);stroke:#fff;stroke-width:1.6;stroke-linejoin:round}
+#mic.hov .mh{fill:#fff}
+#mic.hov .mg{stroke:var(--rose)}
+#mic.lbl::after{content:attr(data-l);position:absolute;left:34px;top:-2px;background:var(--rose);color:#fff;font-weight:700;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:999px;outline:1.5px solid #fff;white-space:nowrap}
+.vvwave{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;pointer-events:none;z-index:99996;rotate:var(--r,-18deg)}
+.vvwave svg{width:100%;height:100%;overflow:visible}
+.vvwave path{fill:none;stroke:var(--rose);stroke-width:5;stroke-linecap:round;paint-order:stroke}
+.vvwave g{opacity:0;transform-origin:0 0;animation:vvw 1s cubic-bezier(.16,1,.3,1) forwards}
+.vvwave .a2{animation-delay:.09s}
+.vvwave .a3{animation-delay:.18s}
+@keyframes vvw{0%{opacity:0;transform:scale(.5)}20%{opacity:1}100%{opacity:0;transform:scale(1.45)}}
+@media (hover:none){ #mic,.vvwave{display:none} }
