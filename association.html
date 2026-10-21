@@ -10,21 +10,24 @@
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.png" type="image/png">
-<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#0B245B">
+<link rel="preload" href="fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=3">
 <script src="cookie-consent.js" defer></script>
 <script src="popup-info.js" defer></script>
 </head>
 <body>
-
+<a class="skip" href="#main">Aller au contenu</a>
 <header class="site">
-  <nav class="nav wrap">
+  <nav class="nav wrap" aria-label="Navigation principale">
     <a href="index.html" class="logo" aria-label="Vive Voix, accueil">
-      <img src="logo.png" alt="Vive Voix, l'école de la parole">
+      <img src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
     </a>
-    <button class="burger" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul id="menu">
       <li><a class="lnk" href="index.html">Accueil</a></li>
-      <li><a class="lnk active" href="association.html">L'association</a></li>
+      <li><a class="lnk active" href="association.html" aria-current="page">L'association</a></li>
       <li><a class="lnk" href="ateliers.html">Les ateliers</a></li>
       <li><a class="lnk" href="tarifs.html">Tarifs</a></li>
       <li><a class="lnk" href="contact.html">Contact</a></li>
@@ -33,6 +36,9 @@
     <a class="btn btn-rose nav-cta" href="inscription.html">S'inscrire</a>
   </nav>
 </header>
+
+<main id="main">
+
 
 <section class="page-hero">
   <div class="wrap inner">
@@ -56,49 +62,58 @@
   </div>
 </div>
 
-<section class="bg-cream" style="background:var(--cream)">
-  <div class="wrap prose">
-    <h2>La philosophie</h2>
-    <div class="rule"></div>
-    <p>Un enfant qui refuse d'aller à l'école un jour d'exposé. Un candidat parfaitement qualifié qui perd ses moyens face au recruteur. Une idée solide évoquée à mi-voix en réunion, puis reprise par un collègue plus à l'aise à l'oral. Un discours de mariage confié à quelqu'un d'autre à la dernière minute. Ces scènes n'ont rien d'exceptionnel, et c'est précisément ce qui doit interroger.</p>
-    <p>À chaque fois, c'est la même compétence qui manque : mettre des mots justes sur ce que l'on pense ou ressent, et les porter avec assurance devant les autres. Savoir s'exprimer à l'oral n'est pas un talent que l'on possède ou non à la naissance. C'est une compétence qui se travaille, qui se muscle, qui se transmet.</p>
-    <p>Ceux qui la maîtrisent l'ont souvent acquise par chance : une famille à l'aise avec les mots, une activité providentielle, un professeur qui a su donner sa place à l'oral. Les autres, la grande majorité, avancent sans ce bagage et le découvrent en creux, à chaque occasion manquée. C'est ce déséquilibre que Vive Voix vient corriger.</p>
-
-    <h2>La mission</h2>
-    <div class="rule"></div>
-    <p>Permettre à chacun, enfant, adolescent ou adulte, d'apprendre à s'exprimer avec aisance et à affirmer ce qu'il porte en lui, par la pratique régulière de l'éloquence et du théâtre, dans un cadre professionnel, bienveillant et résolument tourné vers le plaisir.</p>
-    <p>Le théâtre n'est jamais proposé pour lui-même. Il est le terrain d'entraînement qui permet d'apprendre autre chose : la capacité à s'exprimer avec aisance devant les autres. Même lorsqu'une séance ressemble à un cours de théâtre classique, l'objectif reste le même : ramener chacun vers sa propre parole, plus assurée, plus incarnée, plus libre.</p>
-    <p>Notre pédagogie ne repose pas sur le charisme d'un seul intervenant. Elle s'appuie sur une méthode construite en niveaux progressifs, que chaque membre de l'équipe s'approprie. Cela garantit une cohérence pour les familles, qui savent ce que leur enfant va réellement apprendre d'une année sur l'autre.</p>
-    <p>Enfin, on ne vient pas à Vive Voix comme on suit une formation. On y vient comme on pratique un loisir exigeant, où la progression est réelle mais jamais l'objectif affiché de la séance. Un participant qui s'amuse en osant chaque semaine un peu plus progresse sans même s'en rendre compte.</p>
-
-    <h2>La vision</h2>
-    <div class="rule"></div>
-    <p>Dans les années qui viennent, Vive Voix veut devenir une évidence pour les familles de Lardenne et des quartiers voisins : le nom qui vient naturellement à l'esprit lorsqu'un parent cherche à aider son enfant à gagner en confiance, ou lorsqu'un adulte ressent le besoin de mieux s'exprimer.</p>
-    <p>Cette ambition locale n'est pas un choix de modestie, mais un choix de méthode. Un projet associatif se construit d'abord en profondeur avant de se construire en surface. Lardenne est notre laboratoire et notre preuve : c'est là que la méthode doit démontrer sa valeur avant d'être envisagée ailleurs.</p>
-    <p>Vive Voix ne s'interdit pas de grandir, mais cette croissance ne sera jamais un pari : elle sera la conséquence logique d'un modèle qui a fait ses preuves. Cette discipline n'est pas un frein à l'ambition, elle en est la condition.</p>
+<section>
+  <div class="wrap">
+    <article class="essay rv">
+      <h2><span class="n">01</span>La philosophie</h2>
+      <div class="essay-body">
+      <p>Un enfant qui refuse d'aller à l'école un jour d'exposé. Un candidat parfaitement qualifié qui perd ses moyens face au recruteur. Une idée solide évoquée à mi-voix en réunion, puis reprise par un collègue plus à l'aise à l'oral. Un discours de mariage confié à quelqu'un d'autre à la dernière minute. Ces scènes n'ont rien d'exceptionnel, et c'est précisément ce qui doit interroger.</p>
+      <p>À chaque fois, c'est la même compétence qui manque : mettre des mots justes sur ce que l'on pense ou ressent, et les porter avec assurance devant les autres. Savoir s'exprimer à l'oral n'est pas un talent que l'on possède ou non à la naissance. C'est une compétence qui se travaille, qui se muscle, qui se transmet.</p>
+      <p>Ceux qui la maîtrisent l'ont souvent acquise par chance : une famille à l'aise avec les mots, une activité providentielle, un professeur qui a su donner sa place à l'oral. Les autres, la grande majorité, avancent sans ce bagage et le découvrent en creux, à chaque occasion manquée. C'est ce déséquilibre que Vive Voix vient corriger.</p>
+      </div>
+    </article>
+    <article class="essay rv">
+      <h2><span class="n">02</span>La mission</h2>
+      <div class="essay-body">
+      <p>Permettre à chacun, enfant, adolescent ou adulte, d'apprendre à s'exprimer avec aisance et à affirmer ce qu'il porte en lui, par la pratique régulière de l'éloquence et du théâtre, dans un cadre professionnel, bienveillant et résolument tourné vers le plaisir.</p>
+      <p>Le théâtre n'est jamais proposé pour lui-même. Il est le terrain d'entraînement qui permet d'apprendre autre chose : la capacité à s'exprimer avec aisance devant les autres. Même lorsqu'une séance ressemble à un cours de théâtre classique, l'objectif reste le même : ramener chacun vers sa propre parole, plus assurée, plus incarnée, plus libre.</p>
+      <p>Notre pédagogie ne repose pas sur le charisme d'un seul intervenant. Elle s'appuie sur une méthode construite en niveaux progressifs, que chaque membre de l'équipe s'approprie. Cela garantit une cohérence pour les familles, qui savent ce que leur enfant va réellement apprendre d'une année sur l'autre.</p>
+      <p>Enfin, on ne vient pas à Vive Voix comme on suit une formation. On y vient comme on pratique un loisir exigeant, où la progression est réelle mais jamais l'objectif affiché de la séance. Un participant qui s'amuse en osant chaque semaine un peu plus progresse sans même s'en rendre compte.</p>
+      </div>
+    </article>
+    <article class="essay rv">
+      <h2><span class="n">03</span>La vision</h2>
+      <div class="essay-body">
+      <p>Dans les années qui viennent, Vive Voix veut devenir une évidence pour les familles de Lardenne et des quartiers voisins : le nom qui vient naturellement à l'esprit lorsqu'un parent cherche à aider son enfant à gagner en confiance, ou lorsqu'un adulte ressent le besoin de mieux s'exprimer.</p>
+      <p>Cette ambition locale n'est pas un choix de modestie, mais un choix de méthode. Un projet associatif se construit d'abord en profondeur avant de se construire en surface. Lardenne est notre laboratoire et notre preuve : c'est là que la méthode doit démontrer sa valeur avant d'être envisagée ailleurs.</p>
+      <p>Vive Voix ne s'interdit pas de grandir, mais cette croissance ne sera jamais un pari : elle sera la conséquence logique d'un modèle qui a fait ses preuves. Cette discipline n'est pas un frein à l'ambition, elle en est la condition.</p>
+      </div>
+    </article>
   </div>
 </section>
 
-<section class="invite">
-  <div class="wrap invite-inner">
-    <span class="eyebrow" style="color:var(--rose)">L'équipe</span>
-    <h2>Des professionnels de la scène, formés à <em>la prise de parole</em></h2>
-    <p>Un intervenant référent accompagne le lancement, appuyé par une équipe de six intervenants issus d'une troupe de théâtre. Tous partagent le même objectif : faire de la prise de parole leur but premier, le théâtre restant leur outil. Les groupes sont volontairement maintenus à taille humaine, pour un accompagnement réellement personnalisé.</p>
+<section class="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">L'équipe</span>
+      <h2 class="title">Des professionnels de la scène, formés à <em>la prise de parole</em></h2>
+      <p>Un intervenant référent accompagne le lancement, appuyé par une équipe de six intervenants issus d'une troupe de théâtre. Tous partagent le même objectif : faire de la prise de parole leur but premier, le théâtre restant leur outil. Les groupes sont volontairement maintenus à taille humaine, pour un accompagnement réellement personnalisé.</p>
+    </div>
     <div class="team-grid">
       <div class="team-card">
-        <div class="team-photo"><img src="equipe-1.jpg" alt="Loubna Loulou"></div>
+        <div class="team-photo"><img src="equipe-1.jpg" alt="Loubna Loulou" width="900" height="1200" loading="lazy"></div>
         <h4>Loubna Loulou</h4>
         <span class="role">Présidente</span>
         <p>Secrétaire de direction de profession et mère de trois enfants, elle porte le projet associatif avec un sens aigu de l'organisation et de l'accompagnement humain.</p>
       </div>
       <div class="team-card">
-        <div class="team-photo"><img src="equipe-2.jpg" alt="Jordan Abdelouhab"></div>
+        <div class="team-photo"><img src="equipe-2.jpg" alt="Jordan Abdelouhab" width="600" height="600" loading="lazy"></div>
         <h4>Jordan Abdelouhab</h4>
         <span class="role">Secrétaire &amp; trésorier</span>
         <p>Manager de profession, il voit dans l'association un moyen de créer du collectif et de la cohésion, en fédérant les membres autour d'un projet commun.</p>
       </div>
       <div class="team-card">
-        <div class="team-photo"><img src="equipe-3.jpg" alt="Anthony Gaillac"></div>
+        <div class="team-photo"><img src="equipe-3.jpg" alt="Anthony Gaillac" width="900" height="1097" loading="lazy"></div>
         <h4>Anthony Gaillac</h4>
         <span class="role">Cofondateur</span>
         <p>Chef d'entreprise, il porte la conviction que la prise de parole est un outil d'émancipation, et met son expérience entrepreneuriale au service de cette transmission.</p>
@@ -106,23 +121,33 @@
     </div>
     <h3 class="intervenants-title">Nos intervenants</h3>
     <div class="intervenants-grid">
-      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-1.jpg" alt="Samuel Jarry"></div><span class="int-nom">Samuel Jarry</span><p class="int-bio">Comédien et auteur toulousain, formé au Conservatoire de Théâtre de Toulouse puis au Laboratoire de Formation au Théâtre Physique. Il met son expérience de la scène et de l'écriture au service de la transmission.</p></div>
-      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-2.jpg" alt="Robin Everaert"></div><span class="int-nom">Robin Everaert</span><p class="int-bio">Comédien formé entre la Biélorussie et le Théâtre-École d'Aquitaine à Agen, il co-fonde la compagnie Les Chats de Schrödinger avant de rejoindre Toulouse. Passionné de pédagogie, il transmet le travail du corps et de la voix à tous les âges.</p></div>
-      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-3.jpg" alt="Rémi Pomarède-Dieuzeide"></div><span class="int-nom">Rémi Pomarède-Dieuzeide</span><p class="int-bio">Formé aux théâtres du Ring et du Hangar à Toulouse, il travaille avec plusieurs compagnies toulousaines, entre ateliers de prise de parole et cours de théâtre. Il se spécialise dans le travail de la voix, pour une parole qui sonne vrai.</p></div>
-      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-4.jpg" alt="Louise Duermael-Granier"></div><span class="int-nom">Louise Duermael-Granier</span><p class="int-bio">Formée cinq ans au Conservatoire d'Art Dramatique de Toulouse puis au Théâtre du Hangar, elle est comédienne depuis plus de quatre ans. Elle anime des ateliers théâtre pour enfants dans le cadre du dispositif Passeport pour l'Art.</p></div>
-      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-5.jpg" alt="Nesrine Tkitek"></div><span class="int-nom">Nesrine Tkitek</span><p class="int-bio">Formée dès l'enfance en Tunisie puis à l'option théâtre-danse du lycée Bellevue à Toulouse, elle se forme ensuite au Théâtre du Ring et à L'Acteur Conscient. Elle insiste sur l'accompagnement corporel de la parole.</p></div>
-      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-6.jpg" alt="Julien Rozan"></div><span class="int-nom">Julien Rozan</span><p class="int-bio">Formé à Bordeaux-Montaigne puis au Théâtre du Hangar à Toulouse, il anime depuis plusieurs années des ateliers autour du conte et de la prise de parole. Passionné par les outils de l'Encyclopédie de la Parole, il travaille avec cinq compagnies.</p></div>
+      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-1.jpg" alt="Samuel Jarry" width="600" height="600" loading="lazy"></div><span class="int-nom">Samuel Jarry</span><p class="int-bio">Comédien et auteur toulousain, formé au Conservatoire de Théâtre de Toulouse puis au Laboratoire de Formation au Théâtre Physique. Il met son expérience de la scène et de l'écriture au service de la transmission.</p></div>
+      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-2.jpg" alt="Robin Everaert" width="600" height="600" loading="lazy"></div><span class="int-nom">Robin Everaert</span><p class="int-bio">Comédien formé entre la Biélorussie et le Théâtre-École d'Aquitaine à Agen, il co-fonde la compagnie Les Chats de Schrödinger avant de rejoindre Toulouse. Passionné de pédagogie, il transmet le travail du corps et de la voix à tous les âges.</p></div>
+      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-3.jpg" alt="Rémi Pomarède-Dieuzeide" width="600" height="600" loading="lazy"></div><span class="int-nom">Rémi Pomarède-Dieuzeide</span><p class="int-bio">Formé aux théâtres du Ring et du Hangar à Toulouse, il travaille avec plusieurs compagnies toulousaines, entre ateliers de prise de parole et cours de théâtre. Il se spécialise dans le travail de la voix, pour une parole qui sonne vrai.</p></div>
+      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-4.jpg" alt="Louise Duermael-Granier" width="600" height="600" loading="lazy"></div><span class="int-nom">Louise Duermael-Granier</span><p class="int-bio">Formée cinq ans au Conservatoire d'Art Dramatique de Toulouse puis au Théâtre du Hangar, elle est comédienne depuis plus de quatre ans. Elle anime des ateliers théâtre pour enfants dans le cadre du dispositif Passeport pour l'Art.</p></div>
+      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-5.jpg" alt="Nesrine Tkitek" width="600" height="600" loading="lazy"></div><span class="int-nom">Nesrine Tkitek</span><p class="int-bio">Formée dès l'enfance en Tunisie puis à l'option théâtre-danse du lycée Bellevue à Toulouse, elle se forme ensuite au Théâtre du Ring et à L'Acteur Conscient. Elle insiste sur l'accompagnement corporel de la parole.</p></div>
+      <div class="intervenant-card"><div class="intervenant-photo"><img src="intervenant-6.jpg" alt="Julien Rozan" width="600" height="600" loading="lazy"></div><span class="int-nom">Julien Rozan</span><p class="int-bio">Formé à Bordeaux-Montaigne puis au Théâtre du Hangar à Toulouse, il anime depuis plusieurs années des ateliers autour du conte et de la prise de parole. Passionné par les outils de l'Encyclopédie de la Parole, il travaille avec cinq compagnies.</p></div>
     </div>
   </div>
 </section>
 
-<footer class="site footer-light-in">
-  <div class="wrap cols">
-    <div>
-      <div class="logo"><img src="logo-blanc.png" alt="Vive Voix"></div>
-      <div class="slogan">« Ici, chacun trouve sa voix. »</div>
-      <p class="about">L'école de la parole à Toulouse. Apprendre à s'exprimer avec aisance, par l'éloquence et le théâtre, dans un cadre bienveillant.</p>
-      <div class="socials">
+</main>
+
+<div class="wave" style="background:var(--cream)" aria-hidden="true">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,120 L0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58 L1440,120 Z" fill="#0B245B"/>
+    <path d="M0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58" fill="none" stroke="#D93F72" stroke-width="5" vector-effect="non-scaling-stroke"/>
+  </svg>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p class="foot-slogan">Ici, chacun<br><em>trouve sa voix.</em></p>
+    <div class="cols">
+      <div>
+        <div class="logo"><img src="logo-blanc.png" alt="Vive Voix" width="84" height="84"></div>
+        <p class="about">L'école de la parole à Toulouse. Apprendre à s'exprimer avec aisance, par l'éloquence et le théâtre, dans un cadre bienveillant.</p>
+        <div class="socials">
         <a href="https://www.instagram.com/associationvivevoix/" target="_blank" rel="noopener" aria-label="Instagram">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="5"/><circle cx="18" cy="6" r="0.6" fill="currentColor" stroke="none"/></svg>
         </a>
@@ -139,27 +164,28 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a2.9 2.9 0 0 0-2.05-2.06C18.8 4.18 12 4.18 12 4.18s-6.8 0-8.49.46A2.9 2.9 0 0 0 1.46 6.7C1 8.4 1 12 1 12s0 3.6.46 5.3c.26.99 1.04 1.76 2.05 2.02C5.2 19.82 12 19.82 12 19.82s6.8 0 8.49-.5a2.9 2.9 0 0 0 2.05-2.02C23 15.6 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>
         </a>
       </div>
-    </div>
-    <div>
-      <h4>Navigation</h4>
-      <div class="row"><a href="index.html">Accueil</a></div>
-      <div class="row"><a href="association.html">L'association</a></div>
-      <div class="row"><a href="ateliers.html">Les ateliers</a></div>
-      <div class="row"><a href="tarifs.html">Tarifs</a></div>
-      <div class="row"><a href="contact.html">Contact</a></div>
-      <div class="row"><a href="inscription.html">Inscription</a></div>
-    </div>
-    <div>
-      <h4>Nous joindre</h4>
-      <div class="row">Lardenne, Toulouse</div>
-      <div class="row"><a href="tel:+33651231231">06 51 23 12 31</a></div>
-      <div class="row"><a href="mailto:contact@associationvivevoix.fr">contact@associationvivevoix.fr</a></div>
-      <div class="row">www.associationvivevoix.fr</div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <div class="row"><a href="index.html">Accueil</a></div>
+        <div class="row"><a href="association.html">L'association</a></div>
+        <div class="row"><a href="ateliers.html">Les ateliers</a></div>
+        <div class="row"><a href="tarifs.html">Tarifs</a></div>
+        <div class="row"><a href="contact.html">Contact</a></div>
+        <div class="row"><a href="inscription.html">Inscription</a></div>
+      </div>
+      <div>
+        <h4>Nous joindre</h4>
+        <div class="row">Lardenne, Toulouse</div>
+        <div class="row"><a href="tel:+33651231231">06 51 23 12 31</a></div>
+        <div class="row"><a href="mailto:contact@associationvivevoix.fr">contact@associationvivevoix.fr</a></div>
+        <div class="row">www.associationvivevoix.fr</div>
+      </div>
     </div>
   </div>
   <div class="copy">© 2026 Vive Voix · Association d'art oratoire · <a href="mentions-legales.html">Mentions légales</a> · <a href="#" onclick="vvOpenCookieChoice();return false;">Gérer mes cookies</a></div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

@@ -10,22 +10,25 @@
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.png" type="image/png">
-<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#0B245B">
+<link rel="preload" href="fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=3">
 <script src="cookie-consent.js" defer></script>
 <script src="popup-info.js" defer></script>
 </head>
 <body>
-
+<a class="skip" href="#main">Aller au contenu</a>
 <header class="site">
-  <nav class="nav wrap">
+  <nav class="nav wrap" aria-label="Navigation principale">
     <a href="index.html" class="logo" aria-label="Vive Voix, accueil">
-      <img src="logo.png" alt="Vive Voix, l'école de la parole">
+      <img src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
     </a>
-    <button class="burger" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul id="menu">
       <li><a class="lnk" href="index.html">Accueil</a></li>
       <li><a class="lnk" href="association.html">L'association</a></li>
-      <li><a class="lnk active" href="ateliers.html">Les ateliers</a></li>
+      <li><a class="lnk active" href="ateliers.html" aria-current="page">Les ateliers</a></li>
       <li><a class="lnk" href="tarifs.html">Tarifs</a></li>
       <li><a class="lnk" href="contact.html">Contact</a></li>
       <li class="nav-cta-mobile"><a class="btn btn-rose" href="inscription.html">S'inscrire</a></li>
@@ -33,6 +36,9 @@
     <a class="btn btn-rose nav-cta" href="inscription.html">S'inscrire</a>
   </nav>
 </header>
+
+<main id="main">
+
 
 <section class="page-hero">
   <div class="wrap inner">
@@ -57,45 +63,30 @@
 </div>
 
 <!-- ── Trois dimensions ── -->
-<section class="pillars fade-cream-below fade-from-cream">
+<section>
   <div class="wrap">
-    <div class="center">
+    <div class="sec-head">
       <span class="eyebrow">Le contenu</span>
       <h2 class="title">La voix, le corps, le discours</h2>
       <p class="lead-2">Trois choses simples que l'on travaille à chaque séance.</p>
     </div>
-    <div class="values-grid three">
-      <div class="value">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"/></svg></div>
-        <div><h3>La voix</h3><p>Apprendre à bien respirer, à articuler, et à parler assez fort pour être entendu et compris.</p></div>
-      </div>
-      <div class="value">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M12 9v7M8 22l4-6 4 6M6 13h12"/></svg></div>
-        <div><h3>Le corps</h3><p>Se tenir droit, bouger avec aisance, regarder les gens en face, et apprivoiser le trac.</p></div>
-      </div>
-      <div class="value">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div><h3>Le discours</h3><p>Construire une idée claire, savoir l'expliquer simplement, et improviser quand il le faut.</p></div>
-      </div>
+    <div class="pillars-3">
+      <div class="pillar rv"><span class="n">01</span><h3>La voix</h3><p>Apprendre à bien respirer, à articuler, et à parler assez fort pour être entendu et compris.</p></div>
+      <div class="pillar rv"><span class="n">02</span><h3>Le corps</h3><p>Se tenir droit, bouger avec aisance, regarder les gens en face, et apprivoiser le trac.</p></div>
+      <div class="pillar rv"><span class="n">03</span><h3>Le discours</h3><p>Construire une idée claire, savoir l'expliquer simplement, et improviser quand il le faut.</p></div>
     </div>
 
-    <div class="tool-block">
-      <div class="tool-ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 4.5H4a1 1 0 0 0-1 1v5.5a6 6 0 0 0 5 5.9"/><path d="M5.8 8.2h.01M8.7 8.2h.01M5.9 11.6c.8.7 1.9.7 2.7 0"/><path d="M13.5 7.5H20a1 1 0 0 1 1 1V14a6 6 0 0 1-12 0V8.5a1 1 0 0 1 1-1h3.5z"/><path d="M12.8 11.2h.01M17.2 11.2h.01M13.2 15.4c1-.9 2.6-.9 3.6 0"/></svg>
-      </div>
-      <div class="tool-txt">
-        <span class="tool-label">Notre méthode</span>
-        <h3>On apprend en s'amusant, par le théâtre</h3>
-        <p>Le théâtre est notre outil, pas notre but : il permet d'essayer, de se tromper sans conséquence, et de recommencer autant de fois que nécessaire. Les enfants jouent et improvisent, les ados montent de petites scènes, les adultes s'entraînent à parler en public dans des situations concrètes.</p>
-      </div>
+    <div class="tool-block rv">
+      <div><span class="tool-label">Notre méthode</span><h3>On apprend en s'amusant, par le théâtre</h3></div>
+      <p>Le théâtre est notre outil, pas notre but : il permet d'essayer, de se tromper sans conséquence, et de recommencer autant de fois que nécessaire. Les enfants jouent et improvisent, les ados montent de petites scènes, les adultes s'entraînent à parler en public dans des situations concrètes.</p>
     </div>
   </div>
 </section>
 
 <!-- ── Créneaux ── -->
-<section class="schedule fade-white-below">
+<section class="bg-cream" id="creneaux">
   <div class="wrap">
-    <div class="center">
+    <div class="sec-head">
       <span class="eyebrow">Les créneaux</span>
       <h2 class="title">Nos horaires, dès le 1<sup>er</sup> octobre</h2>
       <p class="lead-2">Trois créneaux hebdomadaires à Lardenne, hors vacances scolaires, à raison d'une séance par semaine et par groupe. Chaque séance dure d'une heure à une heure trente selon l'âge.</p>
@@ -113,24 +104,24 @@
 </section>
 
 <!-- ── Le parcours ── -->
-<section class="pillars before-footer">
+<section>
   <div class="wrap">
-    <div class="center">
+    <div class="sec-head">
       <span class="eyebrow">Le parcours</span>
       <h2 class="title">Comment on rejoint Vive Voix</h2>
     </div>
     <div class="steps-grid">
-      <div class="step">
+      <div class="step rv">
         <span class="num">1</span>
         <h3>Premier contact</h3>
         <p>Un appel, un message, ou une rencontre lors d'un forum de rentrée. On répond à toutes vos questions.</p>
       </div>
-      <div class="step">
+      <div class="step rv">
         <span class="num">2</span>
         <h3>Séance d'essai</h3>
         <p>Vous assistez à une première séance, sans engagement, pour voir si ça vous correspond.</p>
       </div>
-      <div class="step">
+      <div class="step rv">
         <span class="num">3</span>
         <h3>Inscription</h3>
         <p>Si ça vous plaît, vous nous rejoignez pour l'année, au créneau qui vous convient.</p>
@@ -139,13 +130,23 @@
   </div>
 </section>
 
+</main>
+
+<div class="wave" style="background:#fff" aria-hidden="true">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,120 L0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58 L1440,120 Z" fill="#0B245B"/>
+    <path d="M0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58" fill="none" stroke="#D93F72" stroke-width="5" vector-effect="non-scaling-stroke"/>
+  </svg>
+</div>
+
 <footer class="site">
-  <div class="wrap cols">
-    <div>
-      <div class="logo"><img src="logo-blanc.png" alt="Vive Voix"></div>
-      <div class="slogan">« Ici, chacun trouve sa voix. »</div>
-      <p class="about">L'école de la parole à Toulouse. Apprendre à s'exprimer avec aisance, par l'éloquence et le théâtre, dans un cadre bienveillant.</p>
-      <div class="socials">
+  <div class="wrap">
+    <p class="foot-slogan">Ici, chacun<br><em>trouve sa voix.</em></p>
+    <div class="cols">
+      <div>
+        <div class="logo"><img src="logo-blanc.png" alt="Vive Voix" width="84" height="84"></div>
+        <p class="about">L'école de la parole à Toulouse. Apprendre à s'exprimer avec aisance, par l'éloquence et le théâtre, dans un cadre bienveillant.</p>
+        <div class="socials">
         <a href="https://www.instagram.com/associationvivevoix/" target="_blank" rel="noopener" aria-label="Instagram">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="5"/><circle cx="18" cy="6" r="0.6" fill="currentColor" stroke="none"/></svg>
         </a>
@@ -162,27 +163,28 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a2.9 2.9 0 0 0-2.05-2.06C18.8 4.18 12 4.18 12 4.18s-6.8 0-8.49.46A2.9 2.9 0 0 0 1.46 6.7C1 8.4 1 12 1 12s0 3.6.46 5.3c.26.99 1.04 1.76 2.05 2.02C5.2 19.82 12 19.82 12 19.82s6.8 0 8.49-.5a2.9 2.9 0 0 0 2.05-2.02C23 15.6 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>
         </a>
       </div>
-    </div>
-    <div>
-      <h4>Navigation</h4>
-      <div class="row"><a href="index.html">Accueil</a></div>
-      <div class="row"><a href="association.html">L'association</a></div>
-      <div class="row"><a href="ateliers.html">Les ateliers</a></div>
-      <div class="row"><a href="tarifs.html">Tarifs</a></div>
-      <div class="row"><a href="contact.html">Contact</a></div>
-      <div class="row"><a href="inscription.html">Inscription</a></div>
-    </div>
-    <div>
-      <h4>Nous joindre</h4>
-      <div class="row">Lardenne, Toulouse</div>
-      <div class="row"><a href="tel:+33651231231">06 51 23 12 31</a></div>
-      <div class="row"><a href="mailto:contact@associationvivevoix.fr">contact@associationvivevoix.fr</a></div>
-      <div class="row">www.associationvivevoix.fr</div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <div class="row"><a href="index.html">Accueil</a></div>
+        <div class="row"><a href="association.html">L'association</a></div>
+        <div class="row"><a href="ateliers.html">Les ateliers</a></div>
+        <div class="row"><a href="tarifs.html">Tarifs</a></div>
+        <div class="row"><a href="contact.html">Contact</a></div>
+        <div class="row"><a href="inscription.html">Inscription</a></div>
+      </div>
+      <div>
+        <h4>Nous joindre</h4>
+        <div class="row">Lardenne, Toulouse</div>
+        <div class="row"><a href="tel:+33651231231">06 51 23 12 31</a></div>
+        <div class="row"><a href="mailto:contact@associationvivevoix.fr">contact@associationvivevoix.fr</a></div>
+        <div class="row">www.associationvivevoix.fr</div>
+      </div>
     </div>
   </div>
   <div class="copy">© 2026 Vive Voix · Association d'art oratoire · <a href="mentions-legales.html">Mentions légales</a> · <a href="#" onclick="vvOpenCookieChoice();return false;">Gérer mes cookies</a></div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

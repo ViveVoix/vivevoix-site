@@ -3,11 +3,20 @@
   var burger = document.querySelector('.burger');
   var menu = document.getElementById('menu');
   if(burger && menu){
+    var setMenu = function(open){
+      menu.classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    };
     burger.addEventListener('click', function(){
-      menu.classList.toggle('open');
+      setMenu(!menu.classList.contains('open'));
     });
     menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ menu.classList.remove('open'); });
+      a.addEventListener('click', function(){ setMenu(false); });
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && menu.classList.contains('open')) setMenu(false);
     });
   }
 
@@ -202,5 +211,74 @@
     document.addEventListener('visibilitychange', function(){
       if(!document.hidden) tryPlay();
     });
+  }
+})();
+
+
+// ── Direction artistique : en-tête, apparitions, chiffres, mots qui tournent ──
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // En-tête : filet fin dès que l'on fait défiler la page
+  var hdr = document.querySelector('header.site');
+  if(hdr){
+    var onScroll = function(){ hdr.classList.toggle('scrolled', window.scrollY > 8); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+  }
+
+  // Apparition douce des blocs situés sous la ligne de flottaison
+  var rv = document.querySelectorAll('.rv');
+  if(rv.length){
+    if(reduce || !('IntersectionObserver' in window)){
+      rv.forEach(function(el){ el.classList.add('in'); });
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, {threshold:0.12, rootMargin:'0px 0px -6% 0px'});
+      rv.forEach(function(el){
+        var top = el.getBoundingClientRect().top;
+        if(top > window.innerHeight * 0.92){ io.observe(el); }
+        else { el.classList.add('in'); }
+      });
+    }
+  }
+
+  // Chiffres : décompte à l'apparition
+  var counters = document.querySelectorAll('[data-count]');
+  if(counters.length && !reduce && 'IntersectionObserver' in window){
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        var el = en.target, end = parseInt(el.getAttribute('data-count'), 10), t0 = null;
+        co.unobserve(el);
+        el.textContent = '0';
+        var step = function(ts){
+          if(t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / 900, 1);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+          if(p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, {threshold:0.6});
+    counters.forEach(function(el){ co.observe(el); });
+  }
+
+  // Hero : « Ici, on apprend à parler / convaincre / s'affirmer »
+  var rot = document.getElementById('rot');
+  if(rot && !reduce){
+    var words = ['parler', 'convaincre', "s'affirmer"], i = 0;
+    rot.textContent = words[0];
+    setInterval(function(){
+      rot.classList.add('out');
+      setTimeout(function(){
+        i = (i + 1) % words.length;
+        rot.textContent = words[i];
+        rot.classList.remove('out');
+      }, 350);
+    }, 2400);
   }
 })();

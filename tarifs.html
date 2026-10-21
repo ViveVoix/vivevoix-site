@@ -10,29 +10,35 @@
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.png" type="image/png">
-<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#0B245B">
+<link rel="preload" href="fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=3">
 <script src="cookie-consent.js" defer></script>
 <script src="popup-info.js" defer></script>
 </head>
 <body>
-
+<a class="skip" href="#main">Aller au contenu</a>
 <header class="site">
-  <nav class="nav wrap">
+  <nav class="nav wrap" aria-label="Navigation principale">
     <a href="index.html" class="logo" aria-label="Vive Voix, accueil">
-      <img src="logo.png" alt="Vive Voix, l'école de la parole">
+      <img src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
     </a>
-    <button class="burger" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul id="menu">
       <li><a class="lnk" href="index.html">Accueil</a></li>
       <li><a class="lnk" href="association.html">L'association</a></li>
       <li><a class="lnk" href="ateliers.html">Les ateliers</a></li>
-      <li><a class="lnk active" href="tarifs.html">Tarifs</a></li>
+      <li><a class="lnk active" href="tarifs.html" aria-current="page">Tarifs</a></li>
       <li><a class="lnk" href="contact.html">Contact</a></li>
       <li class="nav-cta-mobile"><a class="btn btn-rose" href="inscription.html">S'inscrire</a></li>
     </ul>
     <a class="btn btn-rose nav-cta" href="inscription.html">S'inscrire</a>
   </nav>
 </header>
+
+<main id="main">
+
 
 <section class="page-hero">
   <div class="wrap inner">
@@ -56,7 +62,7 @@
   </div>
 </div>
 
-<section class="pricing fade-from-cream fade-cream-below">
+<section>
   <div class="wrap">
     <p class="limited-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -64,19 +70,19 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </p>
     <div class="price-grid">
-      <div class="price-card">
+      <div class="price-card rv">
         <div class="who">Enfants</div>
         <div class="amount">90 €<small> / trimestre</small></div>
         <div class="per">Dès 7 ans</div>
         <div class="fee-note">+ 20 € de frais d'inscription<br>par an et par personne</div>
       </div>
-      <div class="price-card">
+      <div class="price-card rv">
         <div class="who">Adolescents</div>
         <div class="amount">110 €<small> / trimestre</small></div>
         <div class="per">12 à 17 ans</div>
         <div class="fee-note">+ 20 € de frais d'inscription<br>par an et par personne</div>
       </div>
-      <div class="price-card">
+      <div class="price-card rv">
         <div class="who">Adultes</div>
         <div class="amount">130 €<small> / trimestre</small></div>
         <div class="per">Dès 18 ans</div>
@@ -101,7 +107,7 @@
   </div>
 </section>
 
-<section class="invite">
+<section class="invite light">
   <div class="wrap invite-inner">
     <h2>Envie de tester avant de <em>vous engager ?</em></h2>
     <p>Venez à l'inauguration du 1er octobre 2026, ou contactez-nous pour assister à une première séance selon les places disponibles. Vous participez, vous repartez avec votre propre avis.</p>
@@ -109,13 +115,23 @@
   </div>
 </section>
 
-<footer class="site footer-light-in">
-  <div class="wrap cols">
-    <div>
-      <div class="logo"><img src="logo-blanc.png" alt="Vive Voix"></div>
-      <div class="slogan">« Ici, chacun trouve sa voix. »</div>
-      <p class="about">L'école de la parole à Toulouse. Apprendre à s'exprimer avec aisance, par l'éloquence et le théâtre, dans un cadre bienveillant.</p>
-      <div class="socials">
+</main>
+
+<div class="wave" style="background:var(--cream)" aria-hidden="true">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,120 L0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58 L1440,120 Z" fill="#0B245B"/>
+    <path d="M0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58" fill="none" stroke="#D93F72" stroke-width="5" vector-effect="non-scaling-stroke"/>
+  </svg>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p class="foot-slogan">Ici, chacun<br><em>trouve sa voix.</em></p>
+    <div class="cols">
+      <div>
+        <div class="logo"><img src="logo-blanc.png" alt="Vive Voix" width="84" height="84"></div>
+        <p class="about">L'école de la parole à Toulouse. Apprendre à s'exprimer avec aisance, par l'éloquence et le théâtre, dans un cadre bienveillant.</p>
+        <div class="socials">
         <a href="https://www.instagram.com/associationvivevoix/" target="_blank" rel="noopener" aria-label="Instagram">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="5"/><circle cx="18" cy="6" r="0.6" fill="currentColor" stroke="none"/></svg>
         </a>
@@ -132,27 +148,28 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a2.9 2.9 0 0 0-2.05-2.06C18.8 4.18 12 4.18 12 4.18s-6.8 0-8.49.46A2.9 2.9 0 0 0 1.46 6.7C1 8.4 1 12 1 12s0 3.6.46 5.3c.26.99 1.04 1.76 2.05 2.02C5.2 19.82 12 19.82 12 19.82s6.8 0 8.49-.5a2.9 2.9 0 0 0 2.05-2.02C23 15.6 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>
         </a>
       </div>
-    </div>
-    <div>
-      <h4>Navigation</h4>
-      <div class="row"><a href="index.html">Accueil</a></div>
-      <div class="row"><a href="association.html">L'association</a></div>
-      <div class="row"><a href="ateliers.html">Les ateliers</a></div>
-      <div class="row"><a href="tarifs.html">Tarifs</a></div>
-      <div class="row"><a href="contact.html">Contact</a></div>
-      <div class="row"><a href="inscription.html">Inscription</a></div>
-    </div>
-    <div>
-      <h4>Nous joindre</h4>
-      <div class="row">Lardenne, Toulouse</div>
-      <div class="row"><a href="tel:+33651231231">06 51 23 12 31</a></div>
-      <div class="row"><a href="mailto:contact@associationvivevoix.fr">contact@associationvivevoix.fr</a></div>
-      <div class="row">www.associationvivevoix.fr</div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <div class="row"><a href="index.html">Accueil</a></div>
+        <div class="row"><a href="association.html">L'association</a></div>
+        <div class="row"><a href="ateliers.html">Les ateliers</a></div>
+        <div class="row"><a href="tarifs.html">Tarifs</a></div>
+        <div class="row"><a href="contact.html">Contact</a></div>
+        <div class="row"><a href="inscription.html">Inscription</a></div>
+      </div>
+      <div>
+        <h4>Nous joindre</h4>
+        <div class="row">Lardenne, Toulouse</div>
+        <div class="row"><a href="tel:+33651231231">06 51 23 12 31</a></div>
+        <div class="row"><a href="mailto:contact@associationvivevoix.fr">contact@associationvivevoix.fr</a></div>
+        <div class="row">www.associationvivevoix.fr</div>
+      </div>
     </div>
   </div>
   <div class="copy">© 2026 Vive Voix · Association d'art oratoire · <a href="mentions-legales.html">Mentions légales</a> · <a href="#" onclick="vvOpenCookieChoice();return false;">Gérer mes cookies</a></div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

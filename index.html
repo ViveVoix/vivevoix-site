@@ -14,20 +14,23 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="favicon.png">
-<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#0B245B">
+<link rel="preload" href="fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=3">
 <script src="cookie-consent.js" defer></script>
 <script src="popup-info.js" defer></script>
 </head>
 <body>
-
+<a class="skip" href="#main">Aller au contenu</a>
 <header class="site">
-  <nav class="nav wrap">
+  <nav class="nav wrap" aria-label="Navigation principale">
     <a href="index.html" class="logo" aria-label="Vive Voix, accueil">
-      <img src="logo.png" alt="Vive Voix, l'école de la parole">
+      <img src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
     </a>
-    <button class="burger" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul id="menu">
-      <li><a class="lnk active" href="index.html">Accueil</a></li>
+      <li><a class="lnk active" href="index.html" aria-current="page">Accueil</a></li>
       <li><a class="lnk" href="association.html">L'association</a></li>
       <li><a class="lnk" href="ateliers.html">Les ateliers</a></li>
       <li><a class="lnk" href="tarifs.html">Tarifs</a></li>
@@ -38,23 +41,31 @@
   </nav>
 </header>
 
-<!-- ── HERO IMMERSIF (vidéo plein écran) ── -->
-<section class="hero-cine">
-  <video class="hero-cine-video" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture poster="photo-hero.jpg">
-    <source src="hero.mp4" type="video/mp4">
-  </video>
-  <div class="hero-cine-overlay"></div>
-  <div class="wrap hero-cine-inner">
-    <span class="hero-tag"><span class="dot"></span> Éloquence &amp; théâtre · Lardenne, Toulouse</span>
-    <h1 class="hero-cine-h">Savoir s'exprimer<br>n'est pas un don.<br><em>Ça s'apprend.</em></h1>
-    <p class="hero-cine-sub">Chez Vive Voix, on apprend à parler en public par la pratique. On monte sur scène, on ose, on se trompe, on recommence. Enfants, ados et adultes.</p>
-    <div class="hero-actions">
-      <a href="contact.html" class="btn btn-rose">Découvrir nos ateliers
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="association.html" class="btn btn-line-white">Notre histoire</a>
+<main id="main">
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-status">
+      <span class="hero-tag"><span class="dot"></span> Éloquence &amp; théâtre · Lardenne, Toulouse</span>
     </div>
-    <div class="hero-cine-meta">
+    <h1 class="hero-h"><span class="l">Savoir s'exprimer</span><span class="l">n'est pas un don.</span><span class="l"><em>Ça s'apprend.</em></span></h1>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="hero-sub">Chez Vive Voix, on apprend à parler en public par la pratique. On monte sur scène, on ose, on se trompe, on recommence. Enfants, ados et adultes.</p>
+        <p class="say">Ici, on apprend à <span class="rot" id="rot">parler, convaincre, s'affirmer</span>.</p>
+        <div class="hero-actions">
+          <a href="ateliers.html" class="btn btn-rose">Découvrir nos ateliers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="association.html" class="btn btn-line">Notre histoire</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <video class="hero-cine-video" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture poster="photo-hero.jpg">
+          <source src="hero.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div class="hero-facts">
       <div class="m"><b>Dès 7 ans</b><span>Enfants, ados, adultes</span></div>
       <div class="m"><b>Petits groupes</b><span>Un suivi personnalisé</span></div>
       <div class="m"><b>Lardenne</b><span>Ouest toulousain</span></div>
@@ -62,7 +73,7 @@
   </div>
 </section>
 
-<!-- ── BANDEAU PAROLE ── -->
+<!-- ── BANDEAU ── -->
 <div class="marquee-band" aria-hidden="true">
   <div class="marquee">
     <span>Inauguration le 1er octobre 2026</span><span>Essai gratuit</span><span>Démarrage le 1er octobre</span>
@@ -86,34 +97,52 @@
   </div>
 </div>
 
-<!-- ── CONSTAT ── -->
+<!-- ── CONVICTION ── -->
 <section class="statement">
-  <div class="wrap statement-inner">
+  <div class="wrap">
     <span class="eyebrow">Notre conviction</span>
-    <p class="big">L'école apprend à lire, à écrire, à compter. Beaucoup plus rarement à parler devant un groupe. Pourtant, c'est une compétence comme les autres : elle se travaille, elle se muscle, <b>elle se transmet.</b></p>
+    <p class="big rv">L'école apprend à lire, à écrire, à compter. Beaucoup plus rarement à parler devant un groupe. Pourtant, c'est une compétence comme les autres : elle se travaille, elle se muscle, <b>elle se transmet.</b></p>
   </div>
 </section>
+
+<!-- ── CHIFFRES ── -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-grid rv">
+      <div class="stat"><b data-count="6">6</b><span>intervenants issus d'une troupe de théâtre</span></div>
+      <div class="stat"><b data-count="3">3</b><span>publics : enfants, ados et adultes</span></div>
+      <div class="stat"><b data-count="3">3</b><span>jours par semaine : mardi, mercredi, jeudi</span></div>
+      <div class="stat"><b data-count="7">7</b><span>ans, l'âge minimum pour commencer</span></div>
+    </div>
+  </div>
+</div>
 
 <!-- ── PUBLICS ── -->
 <section class="audiences">
   <div class="wrap">
-    <div class="center">
+    <div class="sec-head">
       <span class="eyebrow">Pour qui</span>
-      <h2 class="title">Une promesse pour chaque âge</h2>
+      <h2 class="title">Une promesse<br>pour chaque âge</h2>
     </div>
-    <div class="aud-grid">
-      <div class="aud">
-        <div class="head"><span class="age">Dès 7 ans</span><h3>Les enfants</h3></div>
-        <div class="body"><p>Un espace où l'on ose enfin lever la main. On travaille la voix, le corps, l'écoute, à travers des jeux et de petites scènes. L'enfant s'amuse, et c'est précisément ce qui le fait progresser.</p></div>
-      </div>
-      <div class="aud">
-        <div class="head"><span class="age">12 à 17 ans</span><h3>Les adolescents</h3></div>
-        <div class="body"><p>L'âge où le regard des autres pèse le plus lourd. Par la scène et la prise de parole répétée, le groupe devient peu à peu un allié plutôt qu'un jury. On apprend à affirmer une idée, un choix, une opinion.</p></div>
-      </div>
-      <div class="aud">
-        <div class="head"><span class="age">Dès 18 ans</span><h3>Les adultes</h3></div>
-        <div class="body"><p>Une prise de parole en réunion, un entretien, un discours à préparer. Beaucoup savent déjà quoi dire, ils cherchent la manière de le dire avec assurance. On travaille la structure, le trac, la présence.</p></div>
-      </div>
+    <div class="index">
+      <a class="index-row rv" href="ateliers.html#creneaux">
+        <span class="idx-num">01</span>
+        <div><h3 class="idx-title">Les enfants</h3><span class="idx-age">Dès 7 ans</span></div>
+        <p class="idx-txt">Un espace où l'on ose enfin lever la main. On travaille la voix, le corps, l'écoute, à travers des jeux et de petites scènes. L'enfant s'amuse, et c'est précisément ce qui le fait progresser.</p>
+        <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="index-row rv" href="ateliers.html#creneaux">
+        <span class="idx-num">02</span>
+        <div><h3 class="idx-title">Les adolescents</h3><span class="idx-age">12 à 17 ans</span></div>
+        <p class="idx-txt">L'âge où le regard des autres pèse le plus lourd. Par la scène et la prise de parole répétée, le groupe devient peu à peu un allié plutôt qu'un jury. On apprend à affirmer une idée, un choix, une opinion.</p>
+        <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="index-row rv" href="ateliers.html#creneaux">
+        <span class="idx-num">03</span>
+        <div><h3 class="idx-title">Les adultes</h3><span class="idx-age">Dès 18 ans</span></div>
+        <p class="idx-txt">Une prise de parole en réunion, un entretien, un discours à préparer. Beaucoup savent déjà quoi dire, ils cherchent la manière de le dire avec assurance. On travaille la structure, le trac, la présence.</p>
+        <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
@@ -130,18 +159,45 @@
       <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Lardenne, Toulouse</span>
     </div>
     <a href="contact.html" class="btn btn-rose">Nous contacter</a>
-    <p style="font-size:.88rem;margin-top:22px;margin-bottom:0">Entrée libre, sans réservation.</p>
+    <p class="note">Entrée libre, sans réservation.</p>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
-<footer class="site footer-light-in">
-  <div class="wrap cols">
+<!-- ── INTERVENANTS ── -->
+<section class="reel-sec">
+  <div class="wrap reel-head">
     <div>
-      <div class="logo"><img src="logo-blanc.png" alt="Vive Voix"></div>
-      <div class="slogan">« Ici, chacun trouve sa voix. »</div>
-      <p class="about">L'école de la parole à Toulouse. Apprendre à s'exprimer avec aisance, par l'éloquence et le théâtre, dans un cadre bienveillant.</p>
-      <div class="socials">
+      <span class="eyebrow">L'équipe</span>
+      <h2 class="title">Nos intervenants</h2>
+    </div>
+    <a href="association.html" class="btn btn-line">Voir toute l'équipe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="reel">
+      <a class="reel-item" href="association.html"><img src="intervenant-1.jpg" alt="Samuel Jarry" width="600" height="600" loading="lazy"><b>Samuel Jarry</b></a>
+      <a class="reel-item" href="association.html"><img src="intervenant-2.jpg" alt="Robin Everaert" width="600" height="600" loading="lazy"><b>Robin Everaert</b></a>
+      <a class="reel-item" href="association.html"><img src="intervenant-3.jpg" alt="Rémi Pomarède-Dieuzeide" width="600" height="600" loading="lazy"><b>Rémi Pomarède-Dieuzeide</b></a>
+      <a class="reel-item" href="association.html"><img src="intervenant-4.jpg" alt="Louise Duermael-Granier" width="600" height="600" loading="lazy"><b>Louise Duermael-Granier</b></a>
+      <a class="reel-item" href="association.html"><img src="intervenant-5.jpg" alt="Nesrine Tkitek" width="600" height="600" loading="lazy"><b>Nesrine Tkitek</b></a>
+      <a class="reel-item" href="association.html"><img src="intervenant-6.jpg" alt="Julien Rozan" width="600" height="600" loading="lazy"><b>Julien Rozan</b></a>
+  </div>
+</section>
+</main>
+
+<div class="wave" style="background:#fff" aria-hidden="true">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,120 L0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58 L1440,120 Z" fill="#0B245B"/>
+    <path d="M0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58" fill="none" stroke="#D93F72" stroke-width="5" vector-effect="non-scaling-stroke"/>
+  </svg>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p class="foot-slogan">Ici, chacun<br><em>trouve sa voix.</em></p>
+    <div class="cols">
+      <div>
+        <div class="logo"><img src="logo-blanc.png" alt="Vive Voix" width="84" height="84"></div>
+        <p class="about">L'école de la parole à Toulouse. Apprendre à s'exprimer avec aisance, par l'éloquence et le théâtre, dans un cadre bienveillant.</p>
+        <div class="socials">
         <a href="https://www.instagram.com/associationvivevoix/" target="_blank" rel="noopener" aria-label="Instagram">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="5"/><circle cx="18" cy="6" r="0.6" fill="currentColor" stroke="none"/></svg>
         </a>
@@ -158,27 +214,28 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a2.9 2.9 0 0 0-2.05-2.06C18.8 4.18 12 4.18 12 4.18s-6.8 0-8.49.46A2.9 2.9 0 0 0 1.46 6.7C1 8.4 1 12 1 12s0 3.6.46 5.3c.26.99 1.04 1.76 2.05 2.02C5.2 19.82 12 19.82 12 19.82s6.8 0 8.49-.5a2.9 2.9 0 0 0 2.05-2.02C23 15.6 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>
         </a>
       </div>
-    </div>
-    <div>
-      <h4>Navigation</h4>
-      <div class="row"><a href="index.html">Accueil</a></div>
-      <div class="row"><a href="association.html">L'association</a></div>
-      <div class="row"><a href="ateliers.html">Les ateliers</a></div>
-      <div class="row"><a href="tarifs.html">Tarifs</a></div>
-      <div class="row"><a href="contact.html">Contact</a></div>
-      <div class="row"><a href="inscription.html">Inscription</a></div>
-    </div>
-    <div>
-      <h4>Nous joindre</h4>
-      <div class="row">Lardenne, Toulouse</div>
-      <div class="row"><a href="tel:+33651231231">06 51 23 12 31</a></div>
-      <div class="row"><a href="mailto:contact@associationvivevoix.fr">contact@associationvivevoix.fr</a></div>
-      <div class="row">www.associationvivevoix.fr</div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <div class="row"><a href="index.html">Accueil</a></div>
+        <div class="row"><a href="association.html">L'association</a></div>
+        <div class="row"><a href="ateliers.html">Les ateliers</a></div>
+        <div class="row"><a href="tarifs.html">Tarifs</a></div>
+        <div class="row"><a href="contact.html">Contact</a></div>
+        <div class="row"><a href="inscription.html">Inscription</a></div>
+      </div>
+      <div>
+        <h4>Nous joindre</h4>
+        <div class="row">Lardenne, Toulouse</div>
+        <div class="row"><a href="tel:+33651231231">06 51 23 12 31</a></div>
+        <div class="row"><a href="mailto:contact@associationvivevoix.fr">contact@associationvivevoix.fr</a></div>
+        <div class="row">www.associationvivevoix.fr</div>
+      </div>
     </div>
   </div>
   <div class="copy">© 2026 Vive Voix · Association d'art oratoire · <a href="mentions-legales.html">Mentions légales</a> · <a href="#" onclick="vvOpenCookieChoice();return false;">Gérer mes cookies</a></div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>
