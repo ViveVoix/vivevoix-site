@@ -13,7 +13,7 @@
 <meta name="theme-color" content="#0B245B">
 <link rel="preload" href="fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <script>
 (function(){var d=document.documentElement;try{
 if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -29,10 +29,11 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 <body>
 <div id="wipe" aria-hidden="true"></div>
 <a class="skip" href="#main">Aller au contenu</a>
-<header class="site">
+<header class="site dark">
   <nav class="nav wrap" aria-label="Navigation principale">
     <a href="index.html" class="logo" aria-label="Vive Voix, accueil">
-      <img src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
+      <img class="l-c" src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
+      <img class="l-w" src="logo-blanc.png" alt="" width="54" height="54">
     </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul id="menu">
@@ -50,7 +51,7 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 <main id="main">
 
 
-<section class="page-hero">
+<section class="page-hero" data-bg="TARIFS">
   <div class="wrap inner">
     <div class="crumb"><a href="index.html">Accueil</a> · Tarifs</div>
     <h1>Une inscription à l'année, <em>réglée par trimestre</em></h1>
@@ -72,7 +73,7 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
   </div>
 </div>
 
-<section>
+<section class="bg-navy">
   <div class="wrap">
     <p class="limited-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -180,7 +181,8 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
   <div class="copy">© 2026 Vive Voix · Association d'art oratoire · <a href="mentions-legales.html">Mentions légales</a> · <a href="#" onclick="vvOpenCookieChoice();return false;">Gérer mes cookies</a></div>
 </footer>
 
-<script src="script.js?v=4"></script>
-<script src="fx.js?v=4"></script>
+<script src="script.js?v=5"></script>
+<script src="fx.js?v=5"></script>
+
 </body>
 </html>

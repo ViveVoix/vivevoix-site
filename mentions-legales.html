@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#0B245B">
 <link rel="preload" href="fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <script>
 (function(){var d=document.documentElement;try{
 if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -27,10 +27,11 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 <body>
 <div id="wipe" aria-hidden="true"></div>
 <a class="skip" href="#main">Aller au contenu</a>
-<header class="site">
+<header class="site dark">
   <nav class="nav wrap" aria-label="Navigation principale">
     <a href="index.html" class="logo" aria-label="Vive Voix, accueil">
-      <img src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
+      <img class="l-c" src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
+      <img class="l-w" src="logo-blanc.png" alt="" width="54" height="54">
     </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul id="menu">
@@ -48,7 +49,7 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 <main id="main">
 
 
-<section class="page-hero">
+<section class="page-hero" data-bg="MENTIONS">
   <div class="wrap inner solo">
     <div class="crumb"><a href="index.html">Accueil</a> · Mentions légales</div>
     <h1>Mentions légales</h1>
@@ -69,7 +70,7 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
   </div>
 </div>
 
-<section style="background:var(--cream)">
+<section>
   <div class="wrap prose">
     <h2>Éditeur du site</h2>
     <div class="rule"></div>
@@ -99,7 +100,7 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 
 </main>
 
-<div class="wave" style="background:var(--cream)" aria-hidden="true">
+<div class="wave" style="background:#fff" aria-hidden="true">
   <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
     <path d="M0,120 L0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58 L1440,120 Z" fill="#0B245B"/>
     <path d="M0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58" fill="none" stroke="#D93F72" stroke-width="5" vector-effect="non-scaling-stroke"/>
@@ -152,7 +153,8 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
   <div class="copy">© 2026 Vive Voix · Association d'art oratoire · <a href="mentions-legales.html">Mentions légales</a> · <a href="#" onclick="vvOpenCookieChoice();return false;">Gérer mes cookies</a></div>
 </footer>
 
-<script src="script.js?v=4"></script>
-<script src="fx.js?v=4"></script>
+<script src="script.js?v=5"></script>
+<script src="fx.js?v=5"></script>
+
 </body>
 </html>

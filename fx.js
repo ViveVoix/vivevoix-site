@@ -28,7 +28,7 @@
   var rot = $('#rot');
   if (rot) {
     var words = ['parler', 'convaincre', "s'affirmer"];
-    var slot = document.createElement('span'); slot.className = 'slot';
+    var slot = document.createElement('span'); slot.className = 'wslot';
     var inner = document.createElement('span');
     words.concat(words[0]).forEach(function (w) {
       var b = document.createElement('b'); b.textContent = w; inner.appendChild(b);
@@ -75,12 +75,13 @@
   /* ---------- 3. Éléments qui apparaissent (décalés) ---------- */
   var FXR = '.lead-2,.sec-head > p,.sec-head .eyebrow,.statement .eyebrow,.essay-body p,.team-card,.intervenant-card,.qa,.cinfo .row,' +
             'form.vv .field,form.vv .btn,.term,.sched-row,.tool-label,.reel-head .btn,.limited-badge,.age-btn,.slot-hint,' +
-            '.invite p,.invite-details,.invite .btn,.date-badge,.docs-bar a,.reel-item,.fxr-x';
+            '.invite p,.invite-details,.invite .btn,.date-badge,.docs-bar a,.tool-block,.price-card,.fxr-x';
   var fxr = $$(FXR);
   fxr.forEach(function (el) {
     var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.matches(FXR); });
     delay(el, Math.min(sibs.indexOf(el) * .08, .5));
     el.classList.add('fxr');
+    if (el.matches('.tool-block,.price-card,.team-card')) { el.classList.remove('rv'); el.classList.add('f3'); }
   });
   var fxi = $$('.team-photo img,.intervenant-photo img,.reel-item img');
   fxi.forEach(function (el) {
@@ -143,6 +144,8 @@
     if (root.classList.contains('ready')) return;
     root.classList.add('ready');
     startObservers();
+    // les photos masquées (clip-path) ne se chargeraient pas en « lazy » : on les charge juste après l'entrée en scène
+    setTimeout(function () { fxi.forEach(function (im) { im.loading = 'eager'; }); }, 1200);
   }
   function whenFonts(cb) {
     var done = false, go = function () { if (!done) { done = true; cb(); } };
@@ -219,7 +222,15 @@
     fab.className = 'fab btn btn-rose'; fab.href = 'inscription.html'; fab.textContent = "S'inscrire";
     document.body.appendChild(fab);
   }
-  var cur = null, cx = 0, cy = 0, tx = 0, ty = 0, curShown = false;
+  var eq = null, eqBars = [], cx = 0, cy = 0, tx = 0, ty = 0, curShown = false, lvl = 0;
+  var pmx = 0, pmy = 0, hx = 0, hy = 0;
+  var cards = $$('.scard'), stickyTop = [];
+  var pageHero = $('.page-hero'), heroH = $$('.hero-h .l'), parImgs = $$('.team-photo img,.intervenant-photo img');
+  var cfUpdate = null, cfStep = null;
+  function measureCards() {
+    stickyTop = cards.map(function (c) { return parseFloat(getComputedStyle(c).top) || 0; });
+  }
+  measureCards(); window.addEventListener('resize', measureCards);
 
   function frame() {
     var y = window.scrollY, vh = window.innerHeight, dh = document.documentElement.scrollHeight;
@@ -251,35 +262,69 @@
       mx -= 0.7 + vel * 0.45;
       if (mx <= -half) mx += half;
       if (mx > 0) mx -= half;
-      marquee.style.transform = 'translate3d(' + mx.toFixed(1) + 'px,0,0)';
+      marquee.style.transform = 'translate3d(' + mx.toFixed(1) + 'px,0,0) skewX(' + clamp(-vel * 0.5, -10, 10).toFixed(2) + 'deg)';
     }
     if (fab && footer) {
       fab.classList.toggle('show', y > 600 && footer.getBoundingClientRect().top > vh * 0.92);
     }
-    if (cur && curShown) {
-      cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
-      cur.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+    // cartes empilées : la carte recouverte recule, s'incline et s'assombrit
+    for (var c = 0; c < cards.length - 1; c++) {
+      var nr = cards[c + 1].getBoundingClientRect(), st = stickyTop[c + 1] || 0;
+      var pp = clamp((vh * 0.95 - nr.top) / (vh * 0.95 - st - 24), 0, 1);
+      cards[c].style.transform = 'scale(' + (1 - pp * 0.07).toFixed(3) + ') perspective(1400px) rotateX(' + (pp * 6).toFixed(2) + 'deg)';
+      cards[c].style.setProperty('--dim', (pp * 0.4).toFixed(2));
     }
+    // bandeau de page : grand mot qui défile en fond
+    if (pageHero && y < vh * 1.2) pageHero.style.setProperty('--sx', (-y * 0.35).toFixed(1) + 'px');
+    // photos : légère parallaxe de profondeur
+    for (var q = 0; q < parImgs.length; q++) {
+      var ir = parImgs[q].parentNode.getBoundingClientRect();
+      if (ir.bottom > 0 && ir.top < vh) parImgs[q].style.setProperty('--ty', clamp((ir.top + ir.height / 2 - vh / 2) * -0.07, -20, 20).toFixed(1) + 'px');
+    }
+    // souris → profondeur du hero (titre étagé + carte vidéo inclinée)
+    if (fine && root.classList.contains('ready')) {
+      hx += (pmx - hx) * 0.07; hy += (pmy - hy) * 0.07;
+      if (y < vh) {
+        for (var h = 0; h < heroH.length; h++) heroH[h].style.translate = (hx * (6 + h * 7)).toFixed(1) + 'px 0';
+        if (heroMedia) heroMedia.style.transform = 'rotateY(' + (hx * 7).toFixed(2) + 'deg) rotateX(' + (-hy * 5).toFixed(2) + 'deg)';
+      }
+    }
+    // barres de son qui suivent la souris
+    if (eq && curShown) {
+      cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
+      eq.style.transform = 'translate3d(' + (cx + 16).toFixed(1) + 'px,' + (cy + 10).toFixed(1) + 'px,0)';
+      lvl *= 0.93;
+      var now = performance.now();
+      for (var k = 0; k < eqBars.length; k++) {
+        eqBars[k].style.height = (5 + (0.5 + 0.5 * Math.sin(now * (0.006 + k * 0.0023) + k * 1.7)) * (4 + lvl * 20)).toFixed(1) + 'px';
+      }
+    }
+    if (cfStep) cfStep();
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
 
-  /* ---------- 9. Curseur, boutons magnétiques, bande photo à glisser ---------- */
+  /* ---------- 9. Souris : barres de son, boutons magnétiques, cartes inclinées ---------- */
   if (fine) {
-    cur = document.createElement('div'); cur.id = 'cur'; document.body.appendChild(cur);
+    eq = document.createElement('div'); eq.id = 'eq';
+    for (var bi = 0; bi < 4; bi++) { var bar = document.createElement('i'); eq.appendChild(bar); eqBars.push(bar); }
+    document.body.appendChild(eq);
     document.addEventListener('mousemove', function (e) {
+      var dx = e.clientX - tx, dy = e.clientY - ty;
+      lvl = Math.min(lvl + Math.hypot(dx, dy) * 0.012, 1);
       tx = e.clientX; ty = e.clientY;
-      if (!curShown) { cx = tx; cy = ty; curShown = true; cur.classList.add('on'); }
+      pmx = (e.clientX / window.innerWidth) * 2 - 1; pmy = (e.clientY / window.innerHeight) * 2 - 1;
+      if (!curShown) { cx = tx; cy = ty; curShown = true; eq.classList.add('on'); }
       var t = e.target, lbl = '';
       if (t.closest) {
         if (t.closest('.reel')) lbl = 'Glisser';
-        else if (t.closest('.index-row')) lbl = 'Voir';
+        else if (t.closest('.scard')) lbl = 'Voir';
       }
-      cur.classList.toggle('lbl', !!lbl);
-      if (lbl) cur.setAttribute('data-l', lbl);
-      cur.classList.toggle('hov', !lbl && !!(t.closest && t.closest('a,button,summary,label,input,select,textarea')));
+      eq.classList.toggle('lbl', !!lbl);
+      if (lbl) eq.setAttribute('data-l', lbl);
+      eq.classList.toggle('hov', !lbl && !!(t.closest && t.closest('a,button,summary,label,input,select,textarea')));
     }, { passive: true });
-    document.addEventListener('mouseleave', function () { cur.classList.remove('on'); curShown = false; });
+    document.addEventListener('mouseleave', function () { eq.classList.remove('on'); curShown = false; });
 
     $$('.btn').forEach(function (b) {
       if (b.classList.contains('fab')) return;
@@ -291,18 +336,82 @@
       b.addEventListener('mouseleave', function () { b.style.translate = ''; });
     });
 
-    var reel = $('.reel');
-    if (reel) {
-      var down = false, sx = 0, sl = 0, moved = 0;
-      reel.addEventListener('mousedown', function (e) { down = true; sx = e.pageX; sl = reel.scrollLeft; moved = 0; });
-      window.addEventListener('mouseup', function () { down = false; reel.classList.remove('drag'); });
-      window.addEventListener('mousemove', function (e) {
-        if (!down) return;
-        moved = e.pageX - sx;
-        if (Math.abs(moved) > 5) reel.classList.add('drag');
-        reel.scrollLeft = sl - moved;
+    // cartes qui se penchent vers la souris (effet 3D)
+    $$('.price-card,.team-card,.intervenant-card,.tool-block').forEach(function (card) {
+      card.classList.add('tilt');
+      card.addEventListener('mousemove', function (e) {
+        if (!card.classList.contains('in')) return;
+        var r = card.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        card.style.transition = 'transform .15s ease-out';
+        card.style.transform = 'perspective(900px) rotateX(' + ((0.5 - py) * 9).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 12).toFixed(2) + 'deg)';
       });
-      reel.addEventListener('click', function (e) { if (Math.abs(moved) > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+      card.addEventListener('mouseleave', function () {
+        card.style.transition = 'transform .8s cubic-bezier(.16,1,.3,1)';
+        card.style.transform = '';
+        setTimeout(function () { card.style.transition = ''; }, 820);
+      });
+    });
+  }
+
+  /* ---------- 10. Carrousel 3D des intervenants ---------- */
+  var reel = $('.reel');
+  if (reel && $$('.reel-item', reel).length > 2) {
+    var items = $$('.reel-item', reel), n = items.length;
+    reel.classList.add('cf'); reel.setAttribute('tabindex', '0');
+    reel.setAttribute('aria-roledescription', 'carrousel'); reel.setAttribute('aria-label', 'Nos intervenants');
+    var pos = 0, target = 0, dragging = false, sxp = 0, spos = 0, moved = 0, hover = false, inview = true, lastAuto = performance.now(), dirty = true;
+    var step = function () { return items[0].offsetWidth * 0.6; };
+    var ARR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="';
+    var nav = document.createElement('div'); nav.className = 'cf-nav';
+    nav.innerHTML = '<button type="button" aria-label="Intervenant précédent">' + ARR + 'M19 12H5M11 6l-6 6 6 6"/></svg></button>' +
+                    '<button type="button" aria-label="Intervenant suivant">' + ARR + 'M5 12h14M13 6l6 6-6 6"/></svg></button>';
+    reel.parentNode.insertBefore(nav, reel.nextSibling);
+    nav.children[0].addEventListener('click', function () { target = Math.round(target) - 1; lastAuto = performance.now(); });
+    nav.children[1].addEventListener('click', function () { target = Math.round(target) + 1; lastAuto = performance.now(); });
+    function place() {
+      var w = items[0].offsetWidth, st = step();
+      for (var i = 0; i < n; i++) {
+        var d = i - pos; d = ((d + n / 2) % n + n) % n - n / 2;
+        var ad = Math.abs(d);
+        items[i].style.transform = 'translate3d(' + (d * st - w / 2).toFixed(1) + 'px,0,' + (-ad * 190).toFixed(1) + 'px) rotateY(' + (-d * 32).toFixed(2) + 'deg) scale(' + (1 - ad * 0.05).toFixed(3) + ')';
+        items[i].style.opacity = Math.max(0.18, 1 - ad * 0.26).toFixed(2);
+        items[i].style.zIndex = String(100 - Math.round(ad * 10));
+      }
     }
+    cfUpdate = place; place();
+    cfStep = function () {
+      var now = performance.now();
+      if (inview && !hover && !dragging && now - lastAuto > 3800) { target = Math.round(target) + 1; lastAuto = now; }
+      if (!dragging && Math.abs(target - pos) > 0.0005) { pos += (target - pos) * 0.09; dirty = true; }
+      if (dirty && inview) { place(); dirty = false; }
+    };
+    window.addEventListener('resize', function () { dirty = true; });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { inview = en[0].isIntersecting; }).observe(reel);
+    reel.addEventListener('mouseenter', function () { hover = true; });
+    reel.addEventListener('mouseleave', function () { hover = false; });
+    reel.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { target = Math.round(target) - 1; e.preventDefault(); }
+      if (e.key === 'ArrowRight') { target = Math.round(target) + 1; e.preventDefault(); }
+    });
+    reel.addEventListener('pointerdown', function (e) {
+      dragging = true; moved = 0; sxp = e.clientX; spos = pos; lastAuto = performance.now();
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      moved = e.clientX - sxp;
+      if (Math.abs(moved) > 5) reel.classList.add('drag');
+      pos = spos - moved / step(); target = pos; dirty = true;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!dragging) return;
+      dragging = false; reel.classList.remove('drag'); target = Math.round(pos); lastAuto = performance.now();
+    });
+    reel.addEventListener('click', function (e) {
+      if (Math.abs(moved) > 6) { e.preventDefault(); return; }
+      var it = e.target.closest && e.target.closest('.reel-item');
+      if (!it) return;
+      var i = items.indexOf(it), d = i - pos; d = ((d + n / 2) % n + n) % n - n / 2;
+      if (Math.abs(d) > 0.4) { e.preventDefault(); e.stopPropagation(); target = Math.round(pos + d); lastAuto = performance.now(); }
+    }, true);
   }
 })();

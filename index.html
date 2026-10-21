@@ -17,7 +17,7 @@
 <meta name="theme-color" content="#0B245B">
 <link rel="preload" href="fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <script>
 (function(){var d=document.documentElement;try{
 if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -37,10 +37,11 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 </div>
 <div id="wipe" aria-hidden="true"></div>
 <a class="skip" href="#main">Aller au contenu</a>
-<header class="site">
+<header class="site dark">
   <nav class="nav wrap" aria-label="Navigation principale">
     <a href="index.html" class="logo" aria-label="Vive Voix, accueil">
-      <img src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
+      <img class="l-c" src="logo.png" alt="Vive Voix, l'école de la parole" width="54" height="54">
+      <img class="l-w" src="logo-blanc.png" alt="" width="54" height="54">
     </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul id="menu">
@@ -59,6 +60,7 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 
 <!-- ── HERO ── -->
 <section class="hero">
+  <div class="hero-3d" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-status">
       <span class="hero-tag"><span class="dot"></span> Éloquence &amp; théâtre · Lardenne, Toulouse</span>
@@ -174,42 +176,23 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
       <span class="eyebrow">Pour qui</span>
       <h2 class="title">Une promesse<br>pour chaque âge</h2>
     </div>
-    <div class="index">
-      <a class="index-row rv" href="ateliers.html#creneaux">
-        <span class="idx-num">01</span>
-        <div><h3 class="idx-title">Les enfants</h3><span class="idx-age">Dès 7 ans</span></div>
-        <p class="idx-txt">Un espace où l'on ose enfin lever la main. On travaille la voix, le corps, l'écoute, à travers des jeux et de petites scènes. L'enfant s'amuse, et c'est précisément ce qui le fait progresser.</p>
-        <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    <div class="stack">
+      <a class="scard c1" style="--k:0" href="ateliers.html#creneaux">
+        <span class="sc-n" aria-hidden="true">01</span>
+        <div><h3 class="sc-title">Les enfants</h3><span class="sc-age">Dès 7 ans</span></div>
+        <div class="sc-txt"><p>Un espace où l'on ose enfin lever la main. On travaille la voix, le corps, l'écoute, à travers des jeux et de petites scènes. L'enfant s'amuse, et c'est précisément ce qui le fait progresser.</p><span class="sc-cta">Voir les créneaux <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a>
-      <a class="index-row rv" href="ateliers.html#creneaux">
-        <span class="idx-num">02</span>
-        <div><h3 class="idx-title">Les adolescents</h3><span class="idx-age">12 à 17 ans</span></div>
-        <p class="idx-txt">L'âge où le regard des autres pèse le plus lourd. Par la scène et la prise de parole répétée, le groupe devient peu à peu un allié plutôt qu'un jury. On apprend à affirmer une idée, un choix, une opinion.</p>
-        <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <a class="scard c2" style="--k:1" href="ateliers.html#creneaux">
+        <span class="sc-n" aria-hidden="true">02</span>
+        <div><h3 class="sc-title">Les adolescents</h3><span class="sc-age">12 à 17 ans</span></div>
+        <div class="sc-txt"><p>L'âge où le regard des autres pèse le plus lourd. Par la scène et la prise de parole répétée, le groupe devient peu à peu un allié plutôt qu'un jury. On apprend à affirmer une idée, un choix, une opinion.</p><span class="sc-cta">Voir les créneaux <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a>
-      <a class="index-row rv" href="ateliers.html#creneaux">
-        <span class="idx-num">03</span>
-        <div><h3 class="idx-title">Les adultes</h3><span class="idx-age">Dès 18 ans</span></div>
-        <p class="idx-txt">Une prise de parole en réunion, un entretien, un discours à préparer. Beaucoup savent déjà quoi dire, ils cherchent la manière de le dire avec assurance. On travaille la structure, le trac, la présence.</p>
-        <span class="idx-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <a class="scard c3" style="--k:2" href="ateliers.html#creneaux">
+        <span class="sc-n" aria-hidden="true">03</span>
+        <div><h3 class="sc-title">Les adultes</h3><span class="sc-age">Dès 18 ans</span></div>
+        <div class="sc-txt"><p>Une prise de parole en réunion, un entretien, un discours à préparer. Beaucoup savent déjà quoi dire, ils cherchent la manière de le dire avec assurance. On travaille la structure, le trac, la présence.</p><span class="sc-cta">Voir les créneaux <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a>
     </div>
-  </div>
-</section>
-
-<!-- ── INAUGURATION ── -->
-<section class="invite">
-  <div class="wrap invite-inner">
-    <span class="date-badge">Jeudi 1er octobre 2026 · 17h à 19h</span>
-    <h2>Venez découvrir <em>l'école de la parole.</em></h2>
-    <p>Avant que la saison ne commence, poussez la porte de Vive Voix le temps d'un après-midi : nous vous présentons le projet, l'esprit de nos ateliers et toute l'équipe, autour d'un buffet convivial. Une belle occasion de poser vos questions et de rencontrer celles et ceux qui feront vivre l'école de la parole avec vous.</p>
-    <div class="invite-details">
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> 1er octobre 2026</span>
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 17h à 19h</span>
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Lardenne, Toulouse</span>
-    </div>
-    <a href="contact.html" class="btn btn-rose">Nous contacter</a>
-    <p class="note">Entrée libre, sans réservation.</p>
   </div>
 </section>
 
@@ -231,9 +214,17 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
       <a class="reel-item" href="association.html"><img src="intervenant-6.jpg" alt="Julien Rozan" width="600" height="600" loading="lazy"><b>Julien Rozan</b></a>
   </div>
 </section>
+
+<!-- ── INAUGURATION ── -->
+<section class="invite cta-rose">
+  <div class="wrap invite-inner">
+    <h2>Venez découvrir <em>l'école de la parole.</em></h2>
+    <a href="contact.html" class="btn btn-navy">Nous contacter</a>
+  </div>
+</section>
 </main>
 
-<div class="wave" style="background:#fff" aria-hidden="true">
+<div class="wave" style="background:var(--rose)" aria-hidden="true">
   <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
     <path d="M0,120 L0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58 L1440,120 Z" fill="#0B245B"/>
     <path d="M0,74 C260,18 520,8 760,40 C1000,72 1220,112 1440,58" fill="none" stroke="#D93F72" stroke-width="5" vector-effect="non-scaling-stroke"/>
@@ -286,7 +277,8 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
   <div class="copy">© 2026 Vive Voix · Association d'art oratoire · <a href="mentions-legales.html">Mentions légales</a> · <a href="#" onclick="vvOpenCookieChoice();return false;">Gérer mes cookies</a></div>
 </footer>
 
-<script src="script.js?v=4"></script>
-<script src="fx.js?v=4"></script>
+<script src="script.js?v=5"></script>
+<script src="fx.js?v=5"></script>
+<script type="module" src="scene.js?v=5"></script>
 </body>
 </html>
