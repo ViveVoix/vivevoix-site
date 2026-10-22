@@ -257,6 +257,47 @@
   });
 
   /* ---------- 8. Boucle de défilement : progression, parallaxe, scrub, bandeau ---------- */
+  // repères d'angle (style interface) sur la vidéo, les prix et les portraits
+  $$('.hero-media,.price-card,.team-photo,.intervenant-photo').forEach(function (e) { e.classList.add('hud'); });
+
+  // onde sonore discrète en fond du hero (réagit à la souris)
+  var heroWaveDraw = null;
+  var heroSec = $('.hero');
+  if (heroSec) {
+    var hc = document.createElement('canvas'); hc.className = 'hero-wave'; hc.setAttribute('aria-hidden', 'true');
+    heroSec.insertBefore(hc, heroSec.firstChild);
+    var hwc = hc.getContext('2d'), hwW = 1, hwH = 1, hwVis = true, hwmx = 0.7, hwmy = 0.3, hwsx = 0.7, hwsy = 0.3, hwAlpha = 0;
+    var hwSize = function () {
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      hwW = hc.clientWidth; hwH = hc.clientHeight; hc.width = hwW * dpr; hc.height = hwH * dpr; hwc.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    hwSize(); window.addEventListener('resize', hwSize);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { hwVis = en[0].isIntersecting; }).observe(heroSec);
+    window.addEventListener('pointermove', function (e) {
+      var r = heroSec.getBoundingClientRect(); hwmx = (e.clientX - r.left) / r.width; hwmy = (e.clientY - r.top) / r.height;
+    }, { passive: true });
+    heroWaveDraw = function (now) {
+      if (!hwVis || !root.classList.contains('ready')) return;
+      hwAlpha += (1 - hwAlpha) * 0.02; hwsx += (hwmx - hwsx) * 0.06; hwsy += (hwmy - hwsy) * 0.06;
+      hwc.clearRect(0, 0, hwW, hwH);
+      var L = 8;
+      for (var k = 0; k < L; k++) {
+        var yb = hwH * (0.1 + 0.8 * k / (L - 1)), amp = 12 + (k % 3) * 9, rose = k === 3 || k === 6;
+        hwc.beginPath();
+        for (var x = 0; x <= hwW + 10; x += 8) {
+          var nx = x / hwW;
+          var y = yb + Math.sin(nx * (3.5 + k * 0.5) + now * 0.0007 * (1 + k * 0.1) + k) * amp + Math.sin(nx * (9 - k * 0.3) - now * 0.0011 + k * 2) * amp * 0.4;
+          var dx = (x - hwsx * hwW) / (hwW * 0.14), dy = (yb - hwsy * hwH) / (hwH * 0.16);
+          y += Math.exp(-(dx * dx) - (dy * dy)) * Math.sin(nx * 24 + now * 0.01) * 44;
+          if (x === 0) hwc.moveTo(x, y); else hwc.lineTo(x, y);
+        }
+        hwc.lineWidth = rose ? 1.6 : 1.1;
+        hwc.strokeStyle = rose ? 'rgba(217,63,114,' + (0.5 * hwAlpha).toFixed(3) + ')' : 'rgba(255,255,255,' + ((0.06 + (k % 3) * 0.025) * hwAlpha).toFixed(3) + ')';
+        hwc.stroke();
+      }
+    };
+  }
+
   var prog = document.createElement('div'); prog.id = 'prog'; document.body.appendChild(prog);
   var hdr = $('header.site');
   var heroMedia = $('.hero-media'), heroVid = $('.hero-media video');
@@ -412,6 +453,7 @@
       if (Math.abs(sTarget - sCur) < 0.4) sCur = sTarget;
       sLast = sCur; window.scrollTo(0, sCur);
     }
+    if (heroWaveDraw) heroWaveDraw(performance.now());
     if (cfStep) cfStep();
     requestAnimationFrame(frame);
   }

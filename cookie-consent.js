@@ -44,7 +44,7 @@
     modal.style.cssText =
       "width:100%;max-width:640px;max-height:88vh;overflow:hidden;background:#FBF7F2;" +
       "border-radius:16px;box-shadow:0 30px 70px rgba(0,0,0,.4);" +
-      "font-family:'Montserrat',Arial,sans-serif;color:#3a3a3a;" +
+      "font-family:'Inter',Arial,sans-serif;color:#3a3a3a;" +
       "display:flex;";
 
     modal.innerHTML =
@@ -53,7 +53,7 @@
           '<img src="logo.png" alt="Vive Voix" style="height:56px;width:56px;flex-shrink:0;">' +
           '<a id="vv-cookie-continue" href="#" style="font-size:.85rem;color:#0B245B;font-weight:600;white-space:nowrap;text-decoration:none;">Continuer sans accepter →</a>' +
         '</div>' +
-        '<div style="font-family:\'Bebas Neue\',Arial,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.02em;font-size:1.9rem;color:#0B245B;line-height:1.3;margin-bottom:16px;">Vos préférences sur les cookies</div>' +
+        '<div style="font-family:\'Sora\',Arial,sans-serif;font-weight:700;letter-spacing:-.02em;font-size:1.25rem;color:#0B245B;line-height:1.3;margin-bottom:16px;">Vos préférences sur les cookies</div>' +
         '<div style="font-size:.92rem;line-height:1.6;margin-bottom:14px;">' +
           "Vive Voix aimerait activer Google Analytics sur ce site pour mieux comprendre comment il est utilisé et continuer à l'améliorer au fil du temps. Concrètement, ça nous aide à :" +
         '</div>' +
