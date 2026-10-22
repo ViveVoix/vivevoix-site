@@ -157,8 +157,8 @@
   }
 
   /* ---------- 6. Intro « rideau » + page prête ---------- */
-  var curtain = $('#curtain');
-  var finished = false;
+  var gate = $('#gate');
+  var finished = false, gSurge = 0, gStop = false;
   function ready() {
     if (root.classList.contains('ready')) return;
     root.classList.add('ready');
@@ -170,26 +170,58 @@
     var done = false, go = function () { if (!done) { done = true; cb(); } };
     if (document.fonts && document.fonts.ready) { document.fonts.ready.then(go); setTimeout(go, 900); } else { go(); }
   }
-  function finishIntro() {
-    if (finished) return; finished = true;
-    curtain.classList.add('open');
-    root.classList.remove('intro');
-    setTimeout(ready, 420);
-    setTimeout(function () { if (curtain.parentNode) curtain.parentNode.removeChild(curtain); }, 1400);
-  }
-  if (curtain && root.classList.contains('intro')) {
+  function openGate() {
+    if (finished) return; finished = true; gSurge = 1;
     try { sessionStorage.setItem('vv_intro', '1'); } catch (e) {}
-    var cnt = $('.cnt', curtain), bar = $('.bar i', curtain), t0 = null;
-    var tick = function (ts) {
-      if (finished) return;
-      if (t0 === null) t0 = ts;
-      var p = Math.min((ts - t0) / 1100, 1), e = 1 - Math.pow(1 - p, 3);
-      cnt.textContent = Math.round(e * 100);
-      bar.style.transform = 'scaleX(' + e + ')';
-      if (p < 1) requestAnimationFrame(tick); else setTimeout(finishIntro, 160);
-    };
-    whenFonts(function () { requestAnimationFrame(tick); });
-    curtain.addEventListener('click', finishIntro);
+    gate.classList.add('open');
+    root.classList.remove('intro');
+    setTimeout(ready, 560);
+    setTimeout(function () { gStop = true; if (gate.parentNode) gate.parentNode.removeChild(gate); }, 1900);
+  }
+  if (gate && root.classList.contains('intro')) {
+    // titre : chaque lettre monte à son tour
+    var ln = 0;
+    $$('.g-title .gw', gate).forEach(function (w) {
+      var em = w.querySelector('em'), host = em || w, txt = host.textContent; host.textContent = '';
+      txt.split('').forEach(function (ch) { var i = document.createElement('i'); i.textContent = ch; i.style.setProperty('--i', ln++); host.appendChild(i); });
+    });
+    // fond : lignes sonores qui réagissent à la souris
+    var cv = $('#g-waves', gate), cx2 = cv.getContext('2d'), gW = 1, gH = 1, gmx = 0.5, gmy = 0.5, smx2 = 0.5, smy2 = 0.5;
+    function gSize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      gW = cv.clientWidth; gH = cv.clientHeight; cv.width = gW * dpr; cv.height = gH * dpr; cx2.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    gSize(); window.addEventListener('resize', gSize);
+    window.addEventListener('pointermove', function (e) { gmx = e.clientX / window.innerWidth; gmy = e.clientY / window.innerHeight; }, { passive: true });
+    var LINES = 10, gT0 = performance.now();
+    function gDraw() {
+      if (gStop) return;
+      requestAnimationFrame(gDraw);
+      var t = performance.now() - gT0;
+      smx2 += (gmx - smx2) * 0.08; smy2 += (gmy - smy2) * 0.08; gSurge *= 0.96;
+      cx2.clearRect(0, 0, gW, gH);
+      for (var k = 0; k < LINES; k++) {
+        var yb = gH * (0.14 + 0.72 * k / (LINES - 1)), amp = 10 + (k % 3) * 9;
+        cx2.beginPath();
+        for (var x = 0; x <= gW + 8; x += 7) {
+          var nx = x / gW;
+          var y = yb + Math.sin(nx * (4.5 + k * 0.6) + t * 0.0009 * (1 + k * 0.12) + k) * amp + Math.sin(nx * (10 - k * 0.3) - t * 0.0013 + k * 2) * amp * 0.45;
+          var dx = (x - smx2 * gW) / (gW * 0.16), dy = (yb - smy2 * gH) / (gH * 0.3);
+          y += Math.exp(-(dx * dx) - (dy * dy)) * Math.sin(nx * 26 + t * 0.012) * (48 + gSurge * 170);
+          if (x === 0) cx2.moveTo(x, y); else cx2.lineTo(x, y);
+        }
+        cx2.lineWidth = k % 4 === 1 ? 2 : 1.3;
+        cx2.strokeStyle = k % 4 === 1 ? 'rgba(217,63,114,.7)' : 'rgba(255,255,255,' + (0.1 + (k % 3) * 0.07).toFixed(2) + ')';
+        cx2.stroke();
+      }
+    }
+    var gbtn = $('.g-btn', gate);
+    whenFonts(function () {
+      gate.classList.add('show'); gDraw();
+      setTimeout(function () { if (gbtn && !finished) gbtn.focus({ preventScroll: true }); }, 1500);
+    });
+    gbtn.addEventListener('click', openGate);
+    document.addEventListener('keydown', function (e) { if ((e.key === 'Escape' || e.key === 'Enter') && !finished && gate.classList.contains('show')) { e.preventDefault(); openGate(); } });
   } else if (root.classList.contains('wipe-in')) {
     whenFonts(function () {
       requestAnimationFrame(function () {
@@ -390,17 +422,6 @@
     document.addEventListener('mousemove', function (e) {
       pmx = (e.clientX / window.innerWidth) * 2 - 1; pmy = (e.clientY / window.innerHeight) * 2 - 1;
     }, { passive: true });
-    // au clic : des ondes sonores se propagent
-    document.addEventListener('mousedown', function (e) {
-      if (e.target.closest && e.target.closest('input,textarea,select')) return;
-      var w = document.createElement('div'); w.className = 'vvwave';
-      w.style.left = e.clientX + 'px'; w.style.top = e.clientY + 'px';
-      w.style.setProperty('--r', (-24 + Math.random() * 14).toFixed(0) + 'deg');
-      w.innerHTML = '<svg viewBox="-50 -50 100 100"><g class="a1"><path d="M17-13A21 21 0 0 1 17 13"/></g><g class="a2"><path d="M27-20A33 33 0 0 1 27 20"/></g><g class="a3"><path d="M37-27A46 46 0 0 1 37 27"/></g></svg>';
-      document.body.appendChild(w);
-      setTimeout(function () { if (w.parentNode) w.parentNode.removeChild(w); }, 1100);
-    });
-
     $$('.btn').forEach(function (b) {
       if (b.classList.contains('fab')) return;
       b.addEventListener('mousemove', function (e) {

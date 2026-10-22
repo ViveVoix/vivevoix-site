@@ -31,9 +31,18 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 <script src="popup-info.js" defer></script>
 </head>
 <body>
-<div id="curtain" aria-hidden="true">
-  <div class="pnl l"></div><div class="pnl r"></div>
-  <div class="mid"><img src="logo-blanc.png" alt="" width="92" height="92"><div class="cnt">0</div><div class="bar"><i></i></div></div>
+<div id="gate" role="dialog" aria-modal="true" aria-label="Bienvenue sur Vive Voix">
+  <div class="g-pnl g-l"></div><div class="g-pnl g-r"></div>
+  <canvas id="g-waves" aria-hidden="true"></canvas>
+  <div class="g-top" aria-hidden="true"><span>Saison 2026 — 2027</span><span>Toulouse · Lardenne</span></div>
+  <div class="g-ui">
+    <img class="g-logo" src="logo-blanc.png" alt="" width="84" height="84">
+    <p class="g-kicker">Éloquence &amp; théâtre · Enfants · Ados · Adultes</p>
+    <h2 class="g-title"><span class="gw">Vive</span><span class="gw"><em>Voix</em></span></h2>
+    <p class="g-sub">L'école de la parole</p>
+    <button class="g-btn" type="button">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p class="g-hint" aria-hidden="true">Cliquez pour entrer</p>
+  </div>
 </div>
 <div id="wipe" aria-hidden="true"><div class="wl l1"></div><div class="wl l2"></div><div class="wl l3"></div><div class="wipe-word"></div></div>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -279,6 +288,6 @@ setTimeout(function(){if(!window.__fxReady){d.className=d.className.replace(/\b(
 
 <script src="script.js?v=5"></script>
 <script src="fx.js?v=5"></script>
-<script type="module" src="scene.js?v=5"></script>
+
 </body>
 </html>
