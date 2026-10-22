@@ -965,3 +965,8 @@ header.site.scrolled{background:rgba(255,255,255,.86)}
 
 /* pas de défilement horizontal parasite (cartes en cours d'ouverture 3D, etc.) */
 html,body{overflow-x:clip}
+
+/* texte défilant : un mot bleu, un mot rose, un mot blanc (contour bleu) */
+.ob-track span:nth-child(3n+1){color:var(--navy);-webkit-text-stroke:0}
+.ob-track span:nth-child(3n+2){color:var(--rose);-webkit-text-stroke:0}
+.ob-track span:nth-child(3n+3){color:#fff;-webkit-text-stroke:4.5px var(--navy);paint-order:stroke fill}
