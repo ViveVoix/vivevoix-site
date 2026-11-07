@@ -3,9 +3,20 @@
   var burger = document.querySelector('.burger');
   var menu = document.getElementById('menu');
   if(burger && menu){
+    // sur mobile, le menu est sorti de l'en-tête : plus aucun style de l'en-tête ne peut le coincer
+    var navHome = menu.parentNode, navCta = navHome.querySelector('.nav-cta');
+    var mq = window.matchMedia('(max-width: 820px)');
+    var placeMenu = function(){
+      if (mq.matches) { if (menu.parentNode !== document.body) document.body.appendChild(menu); menu.classList.add('is-sheet'); }
+      else { if (menu.parentNode !== navHome) navHome.insertBefore(menu, navCta); menu.classList.remove('is-sheet'); }
+    };
+    placeMenu();
+    if (mq.addEventListener) mq.addEventListener('change', placeMenu); else if (mq.addListener) mq.addListener(placeMenu);
     var setMenu = function(open){
       menu.classList.toggle('open', open);
+      if (open) { var hh = document.querySelector('header.site'); if (hh) hh.classList.remove('hide'); }
       document.body.classList.toggle('menu-open', open);
+      document.documentElement.classList.toggle('menu-open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
     };
